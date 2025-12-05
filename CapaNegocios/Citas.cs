@@ -1,8 +1,6 @@
 ﻿using System;
-using Microsoft.Data.SqlClient;
-using CapaDatos;
 
-namespace Citas
+namespace Citas 
 {
     public class Citas
     {
@@ -12,53 +10,20 @@ namespace Citas
         public DateTime FechaCita { get; set; }
         public TimeSpan HoraCita { get; set; }
         public string MotivoCita { get; set; }
+        public string Estado { get; set; } // Agregado para coincidir con la Base de datos 
 
-        private ConexionDatos conexion;
+        // Constructor vacío
+        public Citas() { }
 
-        public Citas()
-        {
-            conexion = new ConexionDatos();
-        }
-
+        // Constructor lleno
         public Citas(int idPaciente, int idDoctor, DateTime fechaCita, TimeSpan horaCita, string motivoCita)
         {
-            conexion = new ConexionDatos();
-            IDPaciente = idPaciente;
-            IDDoctor = idDoctor;
-            FechaCita = fechaCita;
-            HoraCita = horaCita;
-            MotivoCita = motivoCita;
-        }
-
-        public int Insertar()
-        {
-            try
-            {
-                SqlConnection conn = conexion.AbrirConexion();
-
-                string sql = "INSERT INTO Citas (IDPaciente, IDDoctor, FechaCita, HoraCita, MotivoCita) " +
-                             "VALUES (@IDPaciente, @IDDoctor, @FechaCita, @HoraCita, @MotivoCita); " +
-                             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
-
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@IDPaciente", this.IDPaciente);
-                cmd.Parameters.AddWithValue("@IDDoctor", this.IDDoctor);
-                cmd.Parameters.AddWithValue("@FechaCita", this.FechaCita);
-                cmd.Parameters.AddWithValue("@HoraCita", this.HoraCita);
-                cmd.Parameters.AddWithValue("@MotivoCita", this.MotivoCita ?? (object)DBNull.Value);
-
-                int idGenerado = (int)cmd.ExecuteScalar();
-                this.IDCita = idGenerado;
-                return idGenerado;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("Error al guardar cita: " + ex.Message);
-            }
-            finally
-            {
-                conexion.CerrarConexion();
-            }
+            this.IDPaciente = idPaciente;
+            this.IDDoctor = idDoctor;
+            this.FechaCita = fechaCita;
+            this.HoraCita = horaCita;
+            this.MotivoCita = motivoCita;
+            this.Estado = "Pendiente"; // Valor por defecto
         }
     }
 }

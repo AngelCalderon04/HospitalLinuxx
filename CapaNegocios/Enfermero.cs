@@ -1,101 +1,43 @@
 ﻿using System;
-using CapaDatos;
 using Personas;
-using Microsoft.Data.SqlClient;
 
-namespace Enfermero
+namespace Enfermero  
 {
-
     public class Enfermero : Persona
     {
-
         public int IDEnfermero { get; set; }
-        public string Turno { get; set; } //manana, tarde, noche, 
-        public string Area { get; set; } //Emergencias, Quirofano,pediatria
+        public string Turno { get; set; } // Manana, Tarde, Noche
+        public string Area { get; set; }  // Emergencias, UCI...
 
+        // Constructor vacío
+        public Enfermero() : base() { }
 
-        //Constructor vacio para onsultar a la base de DATOS 
-
-        public Enfermero() : base()
-        { }
-
-        //Constructor conlosparametrospara crear nuevos ENFERMEROS 
-
-        public Enfermero(int IDEnfermero, string nombre, string cedula, string telefono, string Email, string Turno,
-                         string Area) : base(nombre, cedula, telefono, Email, "Enfermero")
-
+        // Constructor para crear objetos (sin ID, porque es nuevo)
+        public Enfermero(string nombre, string cedula, string telefono, string email,
+                         string turno, string area)
+            : base(nombre, cedula, telefono, email, "Enfermero")
         {
-            this.IDEnfermero = IDEnfermero;
-            this.Turno = Turno;
-            this.Area = Area;
-
-
+            this.Turno = turno;
+            this.Area = area;
         }
-        // Implementación del método abstracto GenerarDiagnostico
+
+        // Implementación del metodo abstracto
         public override string GenerarDiagnostico()
         {
-            return $"Reporte de enfermería generado por {this.Nombre}, Área: {this.Area}, Turno: {this.Turno}";
+            return $"Reporte de enfermería generado por {this.Nombre}. Área: {this.Area}.";
         }
 
-        // Sobrescritura del método virtual CalcularHonorarios
+        //Logica para calcular honorarios de Enferemros 
         public override decimal CalcularHonorarios()
         {
-            // Los enfermeros cobran según su turno
-            decimal tarifaBase = 500; // Tarifa base por turno
+            decimal tarifaBase = 500;
 
             if (this.Turno == "Noche")
-            {
-                return tarifaBase * 1.5m; // 50% más en turno nocturno
-            }
+                return tarifaBase * 1.5m; // +50%
             else if (this.Turno == "Tarde")
-            {
-                return tarifaBase * 1.2m; // 20% más en turno tarde
-            }
-            else // Mañana
-            {
-                return tarifaBase;
-            }
-        }
-
-        // Método para insertar un nuevo Enfermero
-        // Primero inserta en Personas, luego en Enfermero
-        public new int Insertar()
-        {
-            try
-            {
-                // 1. Insertar en la tabla Personas (llama al método de la clase padre)
-                int IDPersona = base.Insertar();
-
-                // 2. Abrir conexión
-                SqlConnection conn = Conexion.AbrirConexion();
-
-                // 3. SQL para insertar en tabla Enfermero
-                string sql = "INSERT INTO Enfermero (IDPersona, Turno, Area) " +
-                             "VALUES (@IDPersona, @Turno, @Area); " +
-                             "SELECT CAST(SCOPE_IDENTITY() AS INT);";
-
-                // 4. Crear comando
-                SqlCommand cmd = new SqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@IDPersona", IDPersona);
-                cmd.Parameters.AddWithValue("@Turno", this.Turno);
-                cmd.Parameters.AddWithValue("@Area", this.Area);
-
-                // 5. Ejecutar y obtener el ID generado
-                this.IDEnfermero = (int)cmd.ExecuteScalar();
-
-                // 6. Cerrar conexión
-                Conexion.CerrarConexion();
-
-                return this.IDEnfermero;
-            }
-            catch (Exception ex)
-            {
-                throw new Exception("ERROR AL INSERTAR ENFERMERO: " + ex.Message);
-            }
-            finally
-            {
-                Conexion.CerrarConexion();
-            }
+                return tarifaBase * 1.2m; // +20%
+            else
+                return tarifaBase;        // Manana
         }
     }
 }
