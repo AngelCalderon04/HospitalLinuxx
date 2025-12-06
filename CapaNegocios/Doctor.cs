@@ -12,7 +12,7 @@ namespace Doctor
         public string Especialidad { get; set; }
         public string Exequatur { get; set; }
         public decimal TarifaConsulta { get; set; }
-
+        //m
         // Constructor Vacio
         public Doctor() : base() { }
 
