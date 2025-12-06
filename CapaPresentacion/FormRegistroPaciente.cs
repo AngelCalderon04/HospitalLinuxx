@@ -25,7 +25,7 @@ namespace CapaPresentacion
             txtNombre.Focus();
         }
 
-    
+
         private void btnGuargar_Click(object sender, EventArgs e)
         {
             try
@@ -37,7 +37,7 @@ namespace CapaPresentacion
                     return;
                 }
 
-               
+
                 decimal peso = 0;
                 decimal altura = 0;
                 decimal.TryParse(txtPeso.Text, out peso);
@@ -51,7 +51,7 @@ namespace CapaPresentacion
                     txtCedula.Text,
                     txtTelefono.Text,
                     txtEmail.Text,
-                    dtpFecha.Value,            
+                    dtpFecha.Value,
                     cboGrupoSanguineo.Text,
                     txtAlergias.Text,
                     txtSeguro.Text,
@@ -60,7 +60,7 @@ namespace CapaPresentacion
                     altura == 0 ? (decimal?)null : altura
                 );
 
-               
+
                 MessageBox.Show("¡Paciente registrado correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarCampos();
@@ -82,7 +82,7 @@ namespace CapaPresentacion
             this.Close();
         }
 
-          //Metodo para limpiar todo 
+        //Metodo para limpiar todo 
         private void LimpiarCampos()
         {
             txtNombre.Clear();
@@ -114,7 +114,7 @@ namespace CapaPresentacion
             this.txtAltura.KeyPress += new KeyPressEventHandler(SoloDecimales_KeyPress);
         }
 
-     
+
         private void SoloLetras_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
@@ -133,6 +133,16 @@ namespace CapaPresentacion
                 e.Handled = true;
             if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
                 e.Handled = true;
+        }
+
+        private void txtPeso_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblCedula_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -59,28 +59,30 @@
             // lblTitulo
             // 
             lblTitulo.AutoSize = true;
+            lblTitulo.Font = new Font("Segoe UI", 13.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblTitulo.ForeColor = SystemColors.ActiveCaptionText;
-            lblTitulo.Location = new Point(50, 18);
+            lblTitulo.Location = new Point(380, 32);
             lblTitulo.Margin = new Padding(2, 0, 2, 0);
             lblTitulo.Name = "lblTitulo";
-            lblTitulo.Size = new Size(168, 20);
+            lblTitulo.Size = new Size(256, 31);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "REGISTRO DE PACIENTE";
             // 
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.Location = new Point(50, 54);
+            lblNombre.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblNombre.Location = new Point(230, 106);
             lblNombre.Margin = new Padding(2, 0, 2, 0);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(137, 20);
+            lblNombre.Size = new Size(166, 25);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre Completo:";
             // 
             // txtNombre
             // 
-            txtNombre.Location = new Point(199, 54);
-            txtNombre.Margin = new Padding(2, 2, 2, 2);
+            txtNombre.Location = new Point(400, 104);
+            txtNombre.Margin = new Padding(2);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(255, 27);
             txtNombre.TabIndex = 2;
@@ -88,25 +90,27 @@
             // lblCedula
             // 
             lblCedula.AutoSize = true;
-            lblCedula.Location = new Point(50, 95);
+            lblCedula.Font = new Font("Segoe UI", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblCedula.Location = new Point(326, 148);
             lblCedula.Margin = new Padding(2, 0, 2, 0);
             lblCedula.Name = "lblCedula";
-            lblCedula.Size = new Size(58, 20);
+            lblCedula.Size = new Size(70, 25);
             lblCedula.TabIndex = 3;
             lblCedula.Text = "Cedula:";
+            lblCedula.Click += lblCedula_Click;
             // 
             // txtCedula
             // 
-            txtCedula.Location = new Point(122, 90);
-            txtCedula.Margin = new Padding(2, 2, 2, 2);
+            txtCedula.Location = new Point(401, 149);
+            txtCedula.Margin = new Padding(2);
             txtCedula.Name = "txtCedula";
             txtCedula.Size = new Size(192, 27);
             txtCedula.TabIndex = 4;
             // 
             // txtTelefono
             // 
-            txtTelefono.Location = new Point(122, 134);
-            txtTelefono.Margin = new Padding(2, 2, 2, 2);
+            txtTelefono.Location = new Point(401, 189);
+            txtTelefono.Margin = new Padding(2);
             txtTelefono.Name = "txtTelefono";
             txtTelefono.Size = new Size(192, 27);
             txtTelefono.TabIndex = 5;
@@ -114,27 +118,29 @@
             // lblTelefono
             // 
             lblTelefono.AutoSize = true;
-            lblTelefono.Location = new Point(50, 136);
+            lblTelefono.Font = new Font("Segoe UI", 10.8F);
+            lblTelefono.Location = new Point(318, 188);
             lblTelefono.Margin = new Padding(2, 0, 2, 0);
             lblTelefono.Name = "lblTelefono";
-            lblTelefono.Size = new Size(67, 20);
+            lblTelefono.Size = new Size(79, 25);
             lblTelefono.TabIndex = 6;
             lblTelefono.Text = "Telefono";
             // 
             // lblEmail
             // 
             lblEmail.AutoSize = true;
-            lblEmail.Location = new Point(50, 180);
+            lblEmail.Font = new Font("Segoe UI", 10.8F);
+            lblEmail.Location = new Point(342, 227);
             lblEmail.Margin = new Padding(2, 0, 2, 0);
             lblEmail.Name = "lblEmail";
-            lblEmail.Size = new Size(46, 20);
+            lblEmail.Size = new Size(54, 25);
             lblEmail.TabIndex = 7;
             lblEmail.Text = "Email";
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(122, 180);
-            txtEmail.Margin = new Padding(2, 2, 2, 2);
+            txtEmail.Location = new Point(401, 225);
+            txtEmail.Margin = new Padding(2);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(192, 27);
             txtEmail.TabIndex = 8;
@@ -142,18 +148,19 @@
             // dtpFechaNacimiento
             // 
             dtpFechaNacimiento.AutoSize = true;
-            dtpFechaNacimiento.Location = new Point(50, 227);
+            dtpFechaNacimiento.Font = new Font("Segoe UI", 10.8F);
+            dtpFechaNacimiento.Location = new Point(240, 272);
             dtpFechaNacimiento.Margin = new Padding(2, 0, 2, 0);
             dtpFechaNacimiento.Name = "dtpFechaNacimiento";
-            dtpFechaNacimiento.Size = new Size(131, 20);
+            dtpFechaNacimiento.Size = new Size(156, 25);
             dtpFechaNacimiento.TabIndex = 9;
             dtpFechaNacimiento.Text = "Fecha Nacimiento:";
             // 
             // dtpFecha
             // 
             dtpFecha.Format = DateTimePickerFormat.Short;
-            dtpFecha.Location = new Point(186, 223);
-            dtpFecha.Margin = new Padding(2, 2, 2, 2);
+            dtpFecha.Location = new Point(401, 270);
+            dtpFecha.Margin = new Padding(2);
             dtpFecha.Name = "dtpFecha";
             dtpFecha.Size = new Size(142, 27);
             dtpFecha.TabIndex = 10;
@@ -161,10 +168,11 @@
             // lblGrupoSang
             // 
             lblGrupoSang.AutoSize = true;
-            lblGrupoSang.Location = new Point(50, 277);
+            lblGrupoSang.Font = new Font("Segoe UI", 10.8F);
+            lblGrupoSang.Location = new Point(246, 314);
             lblGrupoSang.Margin = new Padding(2, 0, 2, 0);
             lblGrupoSang.Name = "lblGrupoSang";
-            lblGrupoSang.Size = new Size(124, 20);
+            lblGrupoSang.Size = new Size(151, 25);
             lblGrupoSang.TabIndex = 11;
             lblGrupoSang.Text = "Grupo Sanguineo";
             // 
@@ -172,8 +180,8 @@
             // 
             cboGrupoSanguineo.FormattingEnabled = true;
             cboGrupoSanguineo.Items.AddRange(new object[] { "O+", "", "O-", "", "A+", "", "A-", "", "B+", "", "B-", "", "AB+", "", "AB-" });
-            cboGrupoSanguineo.Location = new Point(182, 274);
-            cboGrupoSanguineo.Margin = new Padding(2, 2, 2, 2);
+            cboGrupoSanguineo.Location = new Point(401, 311);
+            cboGrupoSanguineo.Margin = new Padding(2);
             cboGrupoSanguineo.Name = "cboGrupoSanguineo";
             cboGrupoSanguineo.Size = new Size(146, 28);
             cboGrupoSanguineo.TabIndex = 12;
@@ -181,17 +189,18 @@
             // lblAlergias
             // 
             lblAlergias.AutoSize = true;
-            lblAlergias.Location = new Point(50, 319);
+            lblAlergias.Font = new Font("Segoe UI", 10.8F);
+            lblAlergias.Location = new Point(317, 364);
             lblAlergias.Margin = new Padding(2, 0, 2, 0);
             lblAlergias.Name = "lblAlergias";
-            lblAlergias.Size = new Size(66, 20);
+            lblAlergias.Size = new Size(79, 25);
             lblAlergias.TabIndex = 13;
             lblAlergias.Text = "Alergias:";
             // 
             // txtAlergias
             // 
-            txtAlergias.Location = new Point(182, 319);
-            txtAlergias.Margin = new Padding(2, 2, 2, 2);
+            txtAlergias.Location = new Point(401, 352);
+            txtAlergias.Margin = new Padding(2);
             txtAlergias.Multiline = true;
             txtAlergias.Name = "txtAlergias";
             txtAlergias.Size = new Size(259, 54);
@@ -200,17 +209,18 @@
             // lblSeguro
             // 
             lblSeguro.AutoSize = true;
-            lblSeguro.Location = new Point(48, 386);
+            lblSeguro.Font = new Font("Segoe UI", 10.8F);
+            lblSeguro.Location = new Point(228, 423);
             lblSeguro.Margin = new Padding(2, 0, 2, 0);
             lblSeguro.Name = "lblSeguro";
-            lblSeguro.Size = new Size(138, 20);
+            lblSeguro.Size = new Size(168, 25);
             lblSeguro.TabIndex = 15;
             lblSeguro.Text = "Numero de Seguro:";
             // 
             // txtSeguro
             // 
-            txtSeguro.Location = new Point(186, 384);
-            txtSeguro.Margin = new Padding(2, 2, 2, 2);
+            txtSeguro.Location = new Point(401, 421);
+            txtSeguro.Margin = new Padding(2);
             txtSeguro.Name = "txtSeguro";
             txtSeguro.Size = new Size(121, 27);
             txtSeguro.TabIndex = 16;
@@ -218,17 +228,18 @@
             // lblContacto
             // 
             lblContacto.AutoSize = true;
-            lblContacto.Location = new Point(15, 424);
+            lblContacto.Font = new Font("Segoe UI", 10.8F);
+            lblContacto.Location = new Point(188, 468);
             lblContacto.Margin = new Padding(2, 0, 2, 0);
             lblContacto.Name = "lblContacto";
-            lblContacto.Size = new Size(175, 20);
+            lblContacto.Size = new Size(209, 25);
             lblContacto.TabIndex = 17;
             lblContacto.Text = "Contacto de Emergencia:";
             // 
             // txtContactoEmergencia
             // 
-            txtContactoEmergencia.Location = new Point(187, 422);
-            txtContactoEmergencia.Margin = new Padding(2, 2, 2, 2);
+            txtContactoEmergencia.Location = new Point(401, 466);
+            txtContactoEmergencia.Margin = new Padding(2);
             txtContactoEmergencia.Name = "txtContactoEmergencia";
             txtContactoEmergencia.Size = new Size(121, 27);
             txtContactoEmergencia.TabIndex = 18;
@@ -236,45 +247,49 @@
             // lblPeso
             // 
             lblPeso.AutoSize = true;
-            lblPeso.Location = new Point(78, 466);
+            lblPeso.Font = new Font("Segoe UI", 10.8F);
+            lblPeso.Location = new Point(309, 505);
             lblPeso.Margin = new Padding(2, 0, 2, 0);
             lblPeso.Name = "lblPeso";
-            lblPeso.Size = new Size(72, 20);
+            lblPeso.Size = new Size(87, 25);
             lblPeso.TabIndex = 19;
             lblPeso.Text = "Peso (Lb):";
             // 
             // txtPeso
             // 
-            txtPeso.Location = new Point(187, 466);
-            txtPeso.Margin = new Padding(2, 2, 2, 2);
+            txtPeso.Location = new Point(401, 503);
+            txtPeso.Margin = new Padding(2);
             txtPeso.Name = "txtPeso";
             txtPeso.Size = new Size(121, 27);
             txtPeso.TabIndex = 20;
+            txtPeso.TextChanged += txtPeso_TextChanged;
             // 
             // lblAltura
             // 
             lblAltura.AutoSize = true;
-            lblAltura.Location = new Point(76, 510);
+            lblAltura.Font = new Font("Segoe UI", 10.8F);
+            lblAltura.Location = new Point(306, 550);
             lblAltura.Margin = new Padding(2, 0, 2, 0);
             lblAltura.Name = "lblAltura";
-            lblAltura.Size = new Size(76, 20);
+            lblAltura.Size = new Size(90, 25);
             lblAltura.TabIndex = 21;
             lblAltura.Text = "Altura (m)";
             // 
             // txtAltura
             // 
-            txtAltura.Location = new Point(169, 510);
-            txtAltura.Margin = new Padding(2, 2, 2, 2);
+            txtAltura.Location = new Point(400, 548);
+            txtAltura.Margin = new Padding(2);
             txtAltura.Name = "txtAltura";
             txtAltura.Size = new Size(121, 27);
             txtAltura.TabIndex = 22;
             // 
             // btnGuargar
             // 
-            btnGuargar.Location = new Point(169, 604);
-            btnGuargar.Margin = new Padding(2, 2, 2, 2);
+            btnGuargar.Font = new Font("Segoe UI", 11.8F);
+            btnGuargar.Location = new Point(224, 604);
+            btnGuargar.Margin = new Padding(2);
             btnGuargar.Name = "btnGuargar";
-            btnGuargar.Size = new Size(90, 27);
+            btnGuargar.Size = new Size(117, 37);
             btnGuargar.TabIndex = 23;
             btnGuargar.Text = "GUARDAR";
             btnGuargar.UseVisualStyleBackColor = true;
@@ -282,10 +297,11 @@
             // 
             // btnLimpiar
             // 
-            btnLimpiar.Location = new Point(426, 604);
-            btnLimpiar.Margin = new Padding(2, 2, 2, 2);
+            btnLimpiar.Font = new Font("Segoe UI", 11.8F);
+            btnLimpiar.Location = new Point(415, 604);
+            btnLimpiar.Margin = new Padding(2);
             btnLimpiar.Name = "btnLimpiar";
-            btnLimpiar.Size = new Size(90, 27);
+            btnLimpiar.Size = new Size(90, 37);
             btnLimpiar.TabIndex = 24;
             btnLimpiar.Text = "Limpiar ";
             btnLimpiar.UseVisualStyleBackColor = true;
@@ -293,10 +309,11 @@
             // 
             // btnCerrar
             // 
-            btnCerrar.Location = new Point(578, 604);
-            btnCerrar.Margin = new Padding(2, 2, 2, 2);
+            btnCerrar.Font = new Font("Segoe UI", 11.8F);
+            btnCerrar.Location = new Point(576, 604);
+            btnCerrar.Margin = new Padding(2);
             btnCerrar.Name = "btnCerrar";
-            btnCerrar.Size = new Size(90, 27);
+            btnCerrar.Size = new Size(98, 37);
             btnCerrar.TabIndex = 25;
             btnCerrar.Text = "CERRAR";
             btnCerrar.UseVisualStyleBackColor = true;
@@ -334,7 +351,7 @@
             Controls.Add(txtNombre);
             Controls.Add(lblNombre);
             Controls.Add(lblTitulo);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "FormRegistroPaciente";
             Text = "FormRegistroPaciente";
             Load += FormRegistroPaciente_Load;
