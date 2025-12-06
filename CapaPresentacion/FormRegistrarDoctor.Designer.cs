@@ -1,6 +1,6 @@
 ﻿namespace CapaPresentacion
 {
-    partial class FormRegistrarPers
+    partial class FormRegistrarDoctor
     {
         /// <summary>
         /// Required designer variable.
@@ -32,9 +32,11 @@
             label1 = new Label();
             label2 = new Label();
             lblEspecialidad = new Label();
-            label4 = new Label();
-            textBox1 = new TextBox();
+            lblExequatur = new Label();
+            txtespecialidad = new TextBox();
             textBox2 = new TextBox();
+            label3 = new Label();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // textDoctor
@@ -65,27 +67,27 @@
             // lblEspecialidad
             // 
             lblEspecialidad.AutoSize = true;
-            lblEspecialidad.Location = new Point(147, 174);
+            lblEspecialidad.Location = new Point(132, 169);
             lblEspecialidad.Name = "lblEspecialidad";
-            lblEspecialidad.Size = new Size(59, 25);
+            lblEspecialidad.Size = new Size(113, 25);
             lblEspecialidad.TabIndex = 3;
-            lblEspecialidad.Text = "label3";
+            lblEspecialidad.Text = "Especialidad:";
             // 
-            // label4
+            // lblExequatur
             // 
-            label4.AutoSize = true;
-            label4.Location = new Point(137, 257);
-            label4.Name = "label4";
-            label4.Size = new Size(59, 25);
-            label4.TabIndex = 4;
-            label4.Text = "label4";
+            lblExequatur.AutoSize = true;
+            lblExequatur.Location = new Point(137, 257);
+            lblExequatur.Name = "lblExequatur";
+            lblExequatur.Size = new Size(94, 25);
+            lblExequatur.TabIndex = 4;
+            lblExequatur.Text = "Exequatur:";
             // 
-            // textBox1
+            // txtespecialidad
             // 
-            textBox1.Location = new Point(306, 184);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(124, 31);
-            textBox1.TabIndex = 5;
+            txtespecialidad.Location = new Point(266, 166);
+            txtespecialidad.Name = "txtespecialidad";
+            txtespecialidad.Size = new Size(192, 31);
+            txtespecialidad.TabIndex = 5;
             // 
             // textBox2
             // 
@@ -94,19 +96,37 @@
             textBox2.Size = new Size(150, 31);
             textBox2.TabIndex = 6;
             // 
-            // FormRegistrarPers
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(152, 340);
+            label3.Name = "label3";
+            label3.Size = new Size(57, 25);
+            label3.TabIndex = 7;
+            label3.Text = "Tarifa:";
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(254, 340);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(150, 31);
+            textBox1.TabIndex = 8;
+            // 
+            // FormRegistrarDoctor
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(textBox2);
             Controls.Add(textBox1);
-            Controls.Add(label4);
+            Controls.Add(label3);
+            Controls.Add(textBox2);
+            Controls.Add(txtespecialidad);
+            Controls.Add(lblExequatur);
             Controls.Add(lblEspecialidad);
             Controls.Add(label2);
             Controls.Add(label1);
             Controls.Add(textDoctor);
-            Name = "FormRegistrarPers";
+            Name = "FormRegistrarDoctor";
             Text = "FormRegistrarPers";
             ResumeLayout(false);
             PerformLayout();
@@ -118,8 +138,10 @@
         private Label label1;
         private Label label2;
         private Label lblEspecialidad;
-        private Label label4;
-        private TextBox textBox1;
+        private Label lblExequatur;
+        private TextBox txtespecialidad;
         private TextBox textBox2;
+        private Label label3;
+        private TextBox textBox1;
     }
 }
