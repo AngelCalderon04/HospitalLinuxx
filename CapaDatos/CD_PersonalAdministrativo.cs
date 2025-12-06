@@ -35,7 +35,7 @@ namespace CapaDatos
 
                     idPersonaGenerado = (int)cmdPersona.ExecuteScalar();
 
-                    // B. INSERTAR EN PERSONAL ADMINISTRATIVO
+                    //INSERTAR EN PERSONAL ADMINISTRATIVO
                     
                     string queryAdmin = "INSERT INTO PersonalAdministrativo (IDPersona, Departamento, Cargo, Salario) " +
                                         "VALUES (@IDPersona, @Departamento, @Cargo, @Salario)";
@@ -94,7 +94,7 @@ namespace CapaDatos
             }
         }
 
-        //  OBTENER LISTA (Para el DataGridView)
+        //  OBTENER LISTA Para el DataGridView
         public DataTable ObtenerTodoPersonalAdmin()
         {
             DataTable dt = new DataTable();

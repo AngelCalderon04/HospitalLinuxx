@@ -33,7 +33,7 @@ namespace CapaPresentacion
         {
             try
             {
-               
+
                 // Instancia la clase CD_Paciente
                 CapaDatos.CD_Paciente gestor = new CapaDatos.CD_Paciente();
 
@@ -83,7 +83,7 @@ namespace CapaPresentacion
                     // Llamamos al metodo desde el gestor sql
                     DataTable dtHistorial = gestor.ObtenerHistorialPorPaciente(idPacienteSeleccionado);
 
-                    // -------------------------------------
+                  
 
                     // Asignar al Grid
                     dgvHistorial.DataSource = dtHistorial;
@@ -104,6 +104,11 @@ namespace CapaPresentacion
         private void btnCerrar_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void dgvHistorial_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

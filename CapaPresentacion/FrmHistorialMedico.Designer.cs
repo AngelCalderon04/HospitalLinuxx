@@ -96,6 +96,7 @@
             dgvHistorial.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvHistorial.Size = new Size(952, 306);
             dgvHistorial.TabIndex = 1;
+            dgvHistorial.CellContentClick += dgvHistorial_CellContentClick;
             // 
             // btnCerrar
             // 
