@@ -39,17 +39,20 @@
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(260, 27);
+            label1.Font = new Font("Segoe UI", 13.8F);
+            label1.Location = new Point(224, 38);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(151, 25);
+            label1.Size = new Size(193, 31);
             label1.TabIndex = 0;
             label1.Text = "MENU PRINCIPAL";
             // 
             // btnRegistrarPaciente
             // 
-            btnRegistrarPaciente.Location = new Point(227, 82);
+            btnRegistrarPaciente.Location = new Point(236, 109);
+            btnRegistrarPaciente.Margin = new Padding(2, 2, 2, 2);
             btnRegistrarPaciente.Name = "btnRegistrarPaciente";
-            btnRegistrarPaciente.Size = new Size(209, 34);
+            btnRegistrarPaciente.Size = new Size(167, 27);
             btnRegistrarPaciente.TabIndex = 1;
             btnRegistrarPaciente.Text = "REGISTRAR PACIENTE ";
             btnRegistrarPaciente.UseVisualStyleBackColor = true;
@@ -57,9 +60,10 @@
             // 
             // btnAgendarCita
             // 
-            btnAgendarCita.Location = new Point(227, 149);
+            btnAgendarCita.Location = new Point(236, 168);
+            btnAgendarCita.Margin = new Padding(2, 2, 2, 2);
             btnAgendarCita.Name = "btnAgendarCita";
-            btnAgendarCita.Size = new Size(212, 34);
+            btnAgendarCita.Size = new Size(170, 27);
             btnAgendarCita.TabIndex = 2;
             btnAgendarCita.Text = "AGENDAR CITA";
             btnAgendarCita.UseVisualStyleBackColor = true;
@@ -67,9 +71,10 @@
             // 
             // btnHistorial
             // 
-            btnHistorial.Location = new Point(226, 272);
+            btnHistorial.Location = new Point(236, 293);
+            btnHistorial.Margin = new Padding(2, 2, 2, 2);
             btnHistorial.Name = "btnHistorial";
-            btnHistorial.Size = new Size(213, 34);
+            btnHistorial.Size = new Size(170, 27);
             btnHistorial.TabIndex = 3;
             btnHistorial.Text = "HISTORIAL PACIENTE ";
             btnHistorial.UseVisualStyleBackColor = true;
@@ -77,9 +82,11 @@
             // 
             // btnSalir
             // 
-            btnSalir.Location = new Point(273, 338);
+            btnSalir.Font = new Font("Segoe UI", 9.8F);
+            btnSalir.Location = new Point(284, 359);
+            btnSalir.Margin = new Padding(2, 2, 2, 2);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(112, 34);
+            btnSalir.Size = new Size(90, 27);
             btnSalir.TabIndex = 4;
             btnSalir.Text = "SALIR";
             btnSalir.UseVisualStyleBackColor = true;
@@ -87,9 +94,10 @@
             // 
             // btnRegistrarCONS
             // 
-            btnRegistrarCONS.Location = new Point(227, 210);
+            btnRegistrarCONS.Location = new Point(236, 234);
+            btnRegistrarCONS.Margin = new Padding(2, 2, 2, 2);
             btnRegistrarCONS.Name = "btnRegistrarCONS";
-            btnRegistrarCONS.Size = new Size(208, 34);
+            btnRegistrarCONS.Size = new Size(166, 27);
             btnRegistrarCONS.TabIndex = 5;
             btnRegistrarCONS.Text = "REGISTRAR CONSULTA";
             btnRegistrarCONS.UseVisualStyleBackColor = true;
@@ -97,15 +105,17 @@
             // 
             // Principal
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            BackgroundImage = Properties.Resources.diapositiva_1_658x502;
+            ClientSize = new Size(640, 455);
             Controls.Add(btnRegistrarCONS);
             Controls.Add(btnSalir);
             Controls.Add(btnHistorial);
             Controls.Add(btnAgendarCita);
             Controls.Add(btnRegistrarPaciente);
             Controls.Add(label1);
+            Margin = new Padding(2, 2, 2, 2);
             Name = "Principal";
             Text = "Principal";
             Load += Principal_Load;
