@@ -69,6 +69,7 @@
             cboPaciente.Name = "cboPaciente";
             cboPaciente.Size = new Size(215, 33);
             cboPaciente.TabIndex = 2;
+            cboPaciente.SelectedIndexChanged += cboPaciente_SelectedIndexChanged;
             // 
             // cboDoctor
             // 

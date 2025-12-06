@@ -117,10 +117,10 @@ namespace CapaPresentacion
 
             try
             {
-              //Aqui llama de la capaDatos los query 
+                //Aqui llama de la capaDatos los query 
                 CD_HistorialMedico gestor = new CD_HistorialMedico();
 
-                
+
                 gestor.RegistrarConsulta(
                     idPaciente,
                     idDoctor,
@@ -141,7 +141,7 @@ namespace CapaPresentacion
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        
+
 
         private void LimpiarCampos()
         {
@@ -156,6 +156,11 @@ namespace CapaPresentacion
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void cboPaciente_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 
