@@ -54,11 +54,26 @@ namespace CapaPresentacion
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            
-                // Si cancelan, cerramos la aplicación
-                this.DialogResult = DialogResult.Cancel;
-                this.Close();
-            
+
+            // Si cancelan, cerramos la aplicación
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
