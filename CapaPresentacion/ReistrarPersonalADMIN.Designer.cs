@@ -47,6 +47,7 @@
             Controls.Add(comboBox1);
             Name = "ReistrarPersonalADMIN";
             Text = "ReistrarPersonalADMIN";
+            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
         }
 

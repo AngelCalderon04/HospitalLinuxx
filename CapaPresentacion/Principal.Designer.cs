@@ -118,6 +118,7 @@
             Margin = new Padding(2);
             Name = "Principal";
             Text = "Principal";
+            WindowState = FormWindowState.Maximized;
             Load += Principal_Load;
             ResumeLayout(false);
             PerformLayout();

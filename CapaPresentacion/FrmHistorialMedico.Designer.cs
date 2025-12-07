@@ -118,6 +118,7 @@
             Controls.Add(gbBusqueda);
             Name = "FrmHistorialMedico";
             Text = "Historial Médico de Pacientes";
+            WindowState = FormWindowState.Maximized;
             Load += FrmHistorialMedico_Load;
             gbBusqueda.ResumeLayout(false);
             gbBusqueda.PerformLayout();

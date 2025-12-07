@@ -44,6 +44,7 @@
             dgvCitas = new DataGridView();
             cboPaciente = new ComboBox();
             cboDoctor = new ComboBox();
+            sqlCommandBuilder1 = new Microsoft.Data.SqlClient.SqlCommandBuilder();
             ((System.ComponentModel.ISupportInitialize)dgvCitas).BeginInit();
             SuspendLayout();
             // 
@@ -223,6 +224,7 @@
             Name = "GestionCitas";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GestionCitas";
+            WindowState = FormWindowState.Maximized;
             Load += FormGestionCitas_Load;
             Click += FormGestionCitas_Load;
             ((System.ComponentModel.ISupportInitialize)dgvCitas).EndInit();
@@ -248,5 +250,6 @@
         private DataGridView dgvCitas;
         private ComboBox cboPaciente;
         private ComboBox cboDoctor;
+        private Microsoft.Data.SqlClient.SqlCommandBuilder sqlCommandBuilder1;
     }
 }

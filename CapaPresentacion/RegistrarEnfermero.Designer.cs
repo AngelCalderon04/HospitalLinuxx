@@ -108,6 +108,7 @@
             Controls.Add(txtNombre);
             Name = "RegistrarEnfermero";
             Text = "RegistrarEnfermero";
+            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
         }

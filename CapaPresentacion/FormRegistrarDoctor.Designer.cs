@@ -168,6 +168,7 @@
             Controls.Add(textDoctor);
             Name = "FormRegistrarDoctor";
             Text = "FormRegistrarPers";
+            WindowState = FormWindowState.Maximized;
             ResumeLayout(false);
             PerformLayout();
         }

@@ -162,6 +162,16 @@ namespace CapaPresentacion
         {
 
         }
+
+        private void cboDoctor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblObservaciones_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 
 
