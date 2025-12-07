@@ -145,6 +145,9 @@ namespace CapaPresentacion
 
         }
 
-        
+        private void txtContactoEmergencia_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

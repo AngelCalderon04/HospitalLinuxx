@@ -104,11 +104,7 @@ namespace CapaPresentacion
                 return;
             }
 
-            if (string.IsNullOrWhiteSpace(txtMotivo.Text))
-            {
-                MessageBox.Show("Por favor, ingrese un motivo para la cita.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            
 
             try
             {
@@ -124,13 +120,13 @@ namespace CapaPresentacion
                 // Recogemos el resto de datos
                 DateTime fecha = dtpFecha.Value.Date; 
                 TimeSpan hora = dtpHora.Value.TimeOfDay;
-                string motivo = txtMotivo.Text.Trim();
+                
 
 
                 //Aqui llmamos a la capaDatosara guardar 
                 CapaDatos.CD_Citas gestorCitas = new CapaDatos.CD_Citas();
 
-                gestorCitas.AgendarCita(idPaciente, idDoctor, fecha, hora, motivo);
+                gestorCitas.AgendarCita(idPaciente, idDoctor, fecha, hora, "");
 
                 MessageBox.Show("¡Cita agendada exitosamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
@@ -145,19 +141,21 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
+                // Agregamos 'd.TarifaConsulta' al SELECT
                 string sql = @"SELECT 
-                           c.IDCita,
-                           pe.Nombre AS Paciente,
-                           dpe.Nombre AS Doctor,
-                           c.FechaCita,
-                           c.HoraCita,
-                           c.MotivoCita
-                       FROM Citas c
-                       INNER JOIN Paciente p ON c.IDPaciente = p.IDPaciente
-                       INNER JOIN Personas pe ON p.IDPersona = pe.IDPersona
-                       INNER JOIN Doctor d ON c.IDDoctor = d.IDDoctor
-                       INNER JOIN Personas dpe ON d.IDPersona = dpe.IDPersona
-                       ORDER BY c.FechaCita, c.HoraCita";
+                    c.IDCita,
+                    pe.Nombre AS Paciente,
+                    dpe.Nombre AS Doctor,
+                    c.FechaCita,
+                    c.HoraCita,
+                    d.TarifaConsulta AS Costo  -- <--- AQUÍ TRAEMOS EL PRECIO DESDE EL DOCTOR
+                
+                FROM Citas c
+                INNER JOIN Paciente p ON c.IDPaciente = p.IDPaciente
+                INNER JOIN Personas pe ON p.IDPersona = pe.IDPersona
+                INNER JOIN Doctor d ON c.IDDoctor = d.IDDoctor
+                INNER JOIN Personas dpe ON d.IDPersona = dpe.IDPersona
+                ORDER BY c.FechaCita, c.HoraCita";
 
                 SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
@@ -165,10 +163,20 @@ namespace CapaPresentacion
 
                 dgvCitas.DataSource = dt;
 
-                // Ajustes opcionales
+                // --- AJUSTES VISUALES ---
                 dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvCitas.ReadOnly = true;
+
+                // Opcional: Ocultar columnas que no quieras ver (como IDs)
+                // dgvCitas.Columns["IDCita"].Visible = false;
+
+                // TRUCO PRO: Darle formato de dinero a la columna Costo
+                if (dgvCitas.Columns.Contains("Costo"))
+                {
+                    dgvCitas.Columns["Costo"].DefaultCellStyle.Format = "C2"; // Formato Moneda ($)
+                    dgvCitas.Columns["Costo"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight; // Alinear a la derecha
+                }
             }
         }
 
@@ -185,7 +193,7 @@ namespace CapaPresentacion
             cboDoctor.Text = "";
             dtpFecha.Value = DateTime.Today;
             dtpHora.Value = DateTime.Now;
-            txtMotivo.Clear();
+            //txtMotivo.Clear();
             cboPaciente.Focus();
         }
 
@@ -262,7 +270,7 @@ namespace CapaPresentacion
                            dpe.Nombre AS Doctor,
                            c.FechaCita,
                            c.HoraCita,
-                           c.MotivoCita
+                      
                        FROM Citas c
                        INNER JOIN Paciente p ON c.IDPaciente = p.IDPaciente
                        INNER JOIN Personas pe ON p.IDPersona = pe.IDPersona

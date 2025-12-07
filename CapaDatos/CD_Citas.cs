@@ -17,15 +17,15 @@ namespace CapaDatos
                 try
                 {
                     // Query BD
-                    string query = "INSERT INTO Citas (IDPaciente, IDDoctor, FechaCita, HoraCita, MotivoCita, Estado) " +
-                                   "VALUES (@IDPaciente, @IDDoctor, @FechaCita, @HoraCita, @MotivoCita, 'Pendiente')";
+                    string query = "INSERT INTO Citas (IDPaciente, IDDoctor, FechaCita, HoraCita,  Estado) " +
+                                   "VALUES (@IDPaciente, @IDDoctor, @FechaCita, @HoraCita 'Pendiente')";
 
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@IDPaciente", idPaciente);
                     cmd.Parameters.AddWithValue("@IDDoctor", idDoctor);
                     cmd.Parameters.AddWithValue("@FechaCita", fecha);
                     cmd.Parameters.AddWithValue("@HoraCita", hora);
-                    cmd.Parameters.AddWithValue("@MotivoCita", motivo ?? (object)DBNull.Value);
+                    //cmd.Parameters.AddWithValue("@MotivoCita", motivo ?? (object)DBNull.Value);
 
                     cmd.ExecuteNonQuery();
                 }
