@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             txtClave = new TextBox();
             txtUsuario = new TextBox();
             btnIngresar = new Button();
@@ -66,9 +65,10 @@
             // btnIngresar
             // 
             btnIngresar.BackColor = SystemColors.InactiveBorder;
-            btnIngresar.Location = new Point(268, 282);
+            btnIngresar.Font = new Font("Century", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnIngresar.Location = new Point(247, 282);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(112, 34);
+            btnIngresar.Size = new Size(128, 34);
             btnIngresar.TabIndex = 2;
             btnIngresar.Text = "INGRESAR ";
             btnIngresar.UseVisualStyleBackColor = false;
@@ -77,9 +77,10 @@
             // btnCancelar
             // 
             btnCancelar.BackColor = SystemColors.InactiveBorder;
+            btnCancelar.Font = new Font("Century", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnCancelar.Location = new Point(434, 282);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(112, 34);
+            btnCancelar.Size = new Size(134, 34);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "CANCELAR ";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -90,13 +91,13 @@
             label1.AutoSize = true;
             label1.BackColor = Color.White;
             label1.BorderStyle = BorderStyle.Fixed3D;
-            label1.FlatStyle = FlatStyle.Popup;
+            label1.FlatStyle = FlatStyle.System;
             label1.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
             label1.Location = new Point(247, 139);
             label1.Name = "label1";
             label1.Size = new Size(115, 25);
             label1.TabIndex = 4;
-            label1.Text = "USUARIO;";
+            label1.Text = "USUARIO:";
             label1.TextAlign = ContentAlignment.TopRight;
             label1.Click += label1_Click;
             // 
@@ -105,24 +106,24 @@
             label2.AutoSize = true;
             label2.BackColor = Color.White;
             label2.BorderStyle = BorderStyle.Fixed3D;
+            label2.FlatStyle = FlatStyle.System;
             label2.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(247, 197);
+            label2.Location = new Point(275, 197);
             label2.Name = "label2";
             label2.Size = new Size(87, 25);
             label2.TabIndex = 5;
-            label2.Text = "CLAVE;";
+            label2.Text = "CLAVE:";
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.BackColor = Color.Transparent;
-            label3.BorderStyle = BorderStyle.FixedSingle;
             label3.FlatStyle = FlatStyle.Flat;
             label3.Font = new Font("Century", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ButtonFace;
             label3.Location = new Point(157, 17);
             label3.Name = "label3";
-            label3.Size = new Size(322, 40);
+            label3.Size = new Size(320, 38);
             label3.TabIndex = 7;
             label3.Text = "HOSPITAL LINUX";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -139,8 +140,8 @@
             // 
             // pictureBox1
             // 
-            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(-55, 40);
+            pictureBox1.Image = Properties.Resources._new;
+            pictureBox1.Location = new Point(-13, 48);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(241, 286);
             pictureBox1.TabIndex = 9;
