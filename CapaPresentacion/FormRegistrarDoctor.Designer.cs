@@ -76,7 +76,7 @@
             // lblExequatur
             // 
             lblExequatur.AutoSize = true;
-            lblExequatur.Location = new Point(137, 257);
+            lblExequatur.Location = new Point(132, 230);
             lblExequatur.Name = "lblExequatur";
             lblExequatur.Size = new Size(94, 25);
             lblExequatur.TabIndex = 4;
@@ -91,7 +91,7 @@
             // 
             // textBox2
             // 
-            textBox2.Location = new Point(280, 255);
+            textBox2.Location = new Point(266, 230);
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(150, 31);
             textBox2.TabIndex = 6;
@@ -99,7 +99,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(152, 340);
+            label3.Location = new Point(148, 340);
             label3.Name = "label3";
             label3.Size = new Size(57, 25);
             label3.TabIndex = 7;
@@ -107,7 +107,7 @@
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(254, 340);
+            textBox1.Location = new Point(250, 340);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(150, 31);
             textBox1.TabIndex = 8;
@@ -116,7 +116,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(951, 513);
             Controls.Add(textBox1);
             Controls.Add(label3);
             Controls.Add(textBox2);
