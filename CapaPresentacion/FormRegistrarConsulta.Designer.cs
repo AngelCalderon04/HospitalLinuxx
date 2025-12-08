@@ -45,6 +45,8 @@
             panel1 = new Panel();
             label2 = new Label();
             panel2 = new Panel();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -217,11 +219,29 @@
             panel2.Size = new Size(145, 708);
             panel2.TabIndex = 16;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(562, 735);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(147, 31);
+            dateTimePicker1.TabIndex = 17;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Format = DateTimePickerFormat.Time;
+            dateTimePicker2.Location = new Point(680, 735);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(158, 31);
+            dateTimePicker2.TabIndex = 18;
+            // 
             // FormRegistrarConsulta
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1234, 792);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(dateTimePicker1);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(button1);
@@ -266,5 +286,7 @@
         private Panel panel1;
         private Label label2;
         private Panel panel2;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
     }
 }
