@@ -16,7 +16,7 @@ namespace CapaDatos
                 conn.Open();
                 try
                 {
-                    // Query BD
+                    // Query BD.
                     string query = "INSERT INTO Citas (IDPaciente, IDDoctor, FechaCita, HoraCita,  Estado) " +
                                    "VALUES (@IDPaciente, @IDDoctor, @FechaCita, @HoraCita, 'Pendiente')";
 
