@@ -190,7 +190,7 @@
             button2.Name = "button2";
             button2.Size = new Size(137, 34);
             button2.TabIndex = 14;
-            button2.Text = "CANCELAR";
+            button2.Text = "SALIR";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 

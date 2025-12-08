@@ -80,5 +80,10 @@ namespace CapaPresentacion
         {
 
         }
+
+        private void FrmLogin_Load(object sender, EventArgs e)
+        {
+            label3.Focus();
+        }
     }
 }

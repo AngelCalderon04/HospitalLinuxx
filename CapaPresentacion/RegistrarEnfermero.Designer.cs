@@ -189,8 +189,9 @@
             button2.Name = "button2";
             button2.Size = new Size(143, 34);
             button2.TabIndex = 16;
-            button2.Text = "CANCELAR";
+            button2.Text = "SALIR";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // cboTurno
             // 
@@ -236,7 +237,7 @@
             Controls.Add(txtNombre);
             Name = "RegistrarEnfermero";
             Text = "RegistrarEnfermero";
-            WindowState = FormWindowState.Maximized;
+            WindowState = FormWindowState.Minimized;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
