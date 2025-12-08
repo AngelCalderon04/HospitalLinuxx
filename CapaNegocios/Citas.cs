@@ -25,5 +25,7 @@ namespace Citas
             this.MotivoCita = motivoCita;
             this.Estado = "Pendiente"; // Valor por defecto
         }
+
+       
     }
 }
