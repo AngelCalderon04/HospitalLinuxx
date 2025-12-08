@@ -34,141 +34,231 @@
             lblEspecialidad = new Label();
             lblExequatur = new Label();
             txtespecialidad = new TextBox();
-            textBox2 = new TextBox();
+            textExequatur = new TextBox();
             label3 = new Label();
-            textBox1 = new TextBox();
+            textTarifa = new TextBox();
             label4 = new Label();
             label5 = new Label();
-            textBox3 = new TextBox();
-            textBox4 = new TextBox();
+            textusuario = new TextBox();
+            textClave = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            label6 = new Label();
+            textCedula = new TextBox();
+            panel1 = new Panel();
+            pictureBox1 = new PictureBox();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // textDoctor
             // 
-            textDoctor.Location = new Point(254, 104);
+            textDoctor.Location = new Point(189, 118);
             textDoctor.Name = "textDoctor";
-            textDoctor.Size = new Size(204, 31);
+            textDoctor.PlaceholderText = "Nombre Completo";
+            textDoctor.Size = new Size(257, 31);
             textDoctor.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(229, 38);
+            label1.Font = new Font("Century", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(290, 26);
             label1.Name = "label1";
-            label1.Size = new Size(171, 25);
+            label1.Size = new Size(362, 38);
             label1.TabIndex = 1;
             label1.Text = "REISTRAR DOCTOR ";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(132, 104);
+            label2.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(78, 122);
             label2.Name = "label2";
-            label2.Size = new Size(87, 25);
+            label2.Size = new Size(96, 23);
             label2.TabIndex = 2;
             label2.Text = "Nombre: ";
+            label2.Click += label2_Click;
             // 
             // lblEspecialidad
             // 
             lblEspecialidad.AutoSize = true;
-            lblEspecialidad.Location = new Point(122, 166);
+            lblEspecialidad.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblEspecialidad.Location = new Point(43, 166);
             lblEspecialidad.Name = "lblEspecialidad";
-            lblEspecialidad.Size = new Size(113, 25);
+            lblEspecialidad.Size = new Size(131, 23);
             lblEspecialidad.TabIndex = 3;
             lblEspecialidad.Text = "Especialidad:";
+            lblEspecialidad.Click += lblEspecialidad_Click;
             // 
             // lblExequatur
             // 
             lblExequatur.AutoSize = true;
-            lblExequatur.Location = new Point(132, 230);
+            lblExequatur.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblExequatur.Location = new Point(60, 220);
             lblExequatur.Name = "lblExequatur";
-            lblExequatur.Size = new Size(94, 25);
+            lblExequatur.Size = new Size(114, 23);
             lblExequatur.TabIndex = 4;
             lblExequatur.Text = "Exequatur:";
             // 
             // txtespecialidad
             // 
-            txtespecialidad.Location = new Point(254, 166);
+            txtespecialidad.Location = new Point(189, 162);
             txtespecialidad.Name = "txtespecialidad";
-            txtespecialidad.Size = new Size(192, 31);
+            txtespecialidad.PlaceholderText = "Especialidad ";
+            txtespecialidad.Size = new Size(257, 31);
             txtespecialidad.TabIndex = 5;
             // 
-            // textBox2
+            // textExequatur
             // 
-            textBox2.Location = new Point(254, 230);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(192, 31);
-            textBox2.TabIndex = 6;
+            textExequatur.Location = new Point(189, 212);
+            textExequatur.Name = "textExequatur";
+            textExequatur.PlaceholderText = "Exequatur";
+            textExequatur.Size = new Size(257, 31);
+            textExequatur.TabIndex = 6;
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(132, 288);
+            label3.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label3.Location = new Point(101, 267);
             label3.Name = "label3";
-            label3.Size = new Size(57, 25);
+            label3.Size = new Size(73, 23);
             label3.TabIndex = 7;
             label3.Text = "Tarifa:";
             // 
-            // textBox1
+            // textTarifa
             // 
-            textBox1.Location = new Point(254, 288);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(192, 31);
-            textBox1.TabIndex = 8;
+            textTarifa.Location = new Point(189, 263);
+            textTarifa.Name = "textTarifa";
+            textTarifa.PlaceholderText = "Tarifa";
+            textTarifa.Size = new Size(257, 31);
+            textTarifa.TabIndex = 8;
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(137, 360);
+            label4.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label4.Location = new Point(85, 366);
             label4.Name = "label4";
-            label4.Size = new Size(76, 25);
+            label4.Size = new Size(89, 23);
             label4.TabIndex = 9;
             label4.Text = "Usuario:";
             // 
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(132, 437);
+            label5.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label5.Location = new Point(101, 418);
             label5.Name = "label5";
-            label5.Size = new Size(110, 25);
+            label5.Size = new Size(68, 23);
             label5.TabIndex = 10;
-            label5.Text = "Contrasena: ";
+            label5.Text = "Clave:";
             // 
-            // textBox3
+            // textusuario
             // 
-            textBox3.Location = new Point(254, 354);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(204, 31);
-            textBox3.TabIndex = 11;
+            textusuario.Location = new Point(189, 366);
+            textusuario.Name = "textusuario";
+            textusuario.PlaceholderText = "Usuario";
+            textusuario.Size = new Size(257, 31);
+            textusuario.TabIndex = 11;
             // 
-            // textBox4
+            // textClave
             // 
-            textBox4.Location = new Point(254, 437);
-            textBox4.Name = "textBox4";
-            textBox4.Size = new Size(192, 31);
-            textBox4.TabIndex = 12;
+            textClave.Location = new Point(189, 418);
+            textClave.Name = "textClave";
+            textClave.PlaceholderText = "Clave ";
+            textClave.Size = new Size(257, 31);
+            textClave.TabIndex = 12;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(78, 496);
+            button1.Name = "button1";
+            button1.Size = new Size(135, 34);
+            button1.TabIndex = 13;
+            button1.Text = "GUARDAR";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button2.Location = new Point(281, 496);
+            button2.Name = "button2";
+            button2.Size = new Size(137, 34);
+            button2.TabIndex = 14;
+            button2.Text = "CANCELAR";
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label6.Location = new Point(94, 317);
+            label6.Name = "label6";
+            label6.Size = new Size(80, 23);
+            label6.TabIndex = 15;
+            label6.Text = "Cedula:";
+            // 
+            // textCedula
+            // 
+            textCedula.Location = new Point(189, 313);
+            textCedula.Name = "textCedula";
+            textCedula.PlaceholderText = "Cedula";
+            textCedula.Size = new Size(257, 31);
+            textCedula.TabIndex = 16;
+            // 
+            // panel1
+            // 
+            panel1.BackColor = Color.RoyalBlue;
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(2, 4);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(953, 74);
+            panel1.TabIndex = 17;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources._new;
+            pictureBox1.Location = new Point(568, 140);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(312, 326);
+            pictureBox1.TabIndex = 18;
+            pictureBox1.TabStop = false;
             // 
             // FormRegistrarDoctor
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(951, 513);
-            Controls.Add(textBox4);
-            Controls.Add(textBox3);
+            BackColor = Color.White;
+            ClientSize = new Size(951, 572);
+            Controls.Add(pictureBox1);
+            Controls.Add(panel1);
+            Controls.Add(textCedula);
+            Controls.Add(label6);
+            Controls.Add(button2);
+            Controls.Add(button1);
+            Controls.Add(textClave);
+            Controls.Add(textusuario);
             Controls.Add(label5);
             Controls.Add(label4);
-            Controls.Add(textBox1);
+            Controls.Add(textTarifa);
             Controls.Add(label3);
-            Controls.Add(textBox2);
+            Controls.Add(textExequatur);
             Controls.Add(txtespecialidad);
             Controls.Add(lblExequatur);
             Controls.Add(lblEspecialidad);
             Controls.Add(label2);
-            Controls.Add(label1);
             Controls.Add(textDoctor);
             Name = "FormRegistrarDoctor";
             Text = "FormRegistrarPers";
-            WindowState = FormWindowState.Maximized;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -181,12 +271,18 @@
         private Label lblEspecialidad;
         private Label lblExequatur;
         private TextBox txtespecialidad;
-        private TextBox textBox2;
+        private TextBox textExequatur;
         private Label label3;
-        private TextBox textBox1;
+        private TextBox textTarifa;
         private Label label4;
         private Label label5;
-        private TextBox textBox3;
-        private TextBox textBox4;
+        private TextBox textusuario;
+        private TextBox textClave;
+        private Button button1;
+        private Button button2;
+        private Label label6;
+        private TextBox textCedula;
+        private Panel panel1;
+        private PictureBox pictureBox1;
     }
 }

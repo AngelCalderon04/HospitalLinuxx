@@ -8,10 +8,11 @@ namespace CapaDatos
     {
         private ConexionDatos conexion = new ConexionDatos();
 
-        // Recibimos los datos sueltos para guardar
+        // Método para guardar TODO de un solo golpe (Transacción)
         public void RegistrarDoctor(
-            string nombre, string cedula, string telefono, string email,
-            string especialidad, string exequatur, decimal tarifa)
+            string nombre, string cedula, string telefono, string email, // Datos Persona
+            string especialidad, string exequatur, decimal tarifa,       // Datos Doctor (Tus parámetros)
+            string usuario, string clave)                                // Datos Usuario
         {
             using (SqlConnection conn = conexion.ObtenerConexion())
             {
@@ -22,9 +23,13 @@ namespace CapaDatos
                 {
                     int idPersonaGenerado = 0;
 
-                    //  INSERTAR PERSONA Rol = 'Doctor'
-                    string queryPersona = "INSERT INTO Personas (Nombre, Cedula, Telefono, Email, Rol) " +
-                                          "VALUES (@Nombre, @Cedula, @Telefono, @Email, 'Doctor'); " +
+                    // ---------------------------------------------------
+                    // PASO 1: INSERTAR EN 'Personas'
+                    // ---------------------------------------------------
+                    // Nota: Si tu tabla Personas NO permite vacíos en Cédula,
+                    // asegúrate de enviar datos reales o permitir NULL en la BD.
+                    string queryPersona = "INSERT INTO Personas (Nombre, Cedula, Telefono, Email, Rol, FechaRegistro) " +
+                                          "VALUES (@Nombre, @Cedula, @Telefono, @Email, 'Doctor', GETDATE()); " +
                                           "SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                     SqlCommand cmdPersona = new SqlCommand(queryPersona, conn, transaction);
@@ -33,33 +38,43 @@ namespace CapaDatos
                     cmdPersona.Parameters.AddWithValue("@Telefono", telefono);
                     cmdPersona.Parameters.AddWithValue("@Email", email ?? (object)DBNull.Value);
 
-                    idPersonaGenerado = (int)cmdPersona.ExecuteScalar();
+                    idPersonaGenerado = (int)cmdPersona.ExecuteScalar(); // Recuperamos el ID creado
 
-                    // INSERTAR DOCTOR
-                    string queryDoctor = "INSERT INTO Doctor (IDPersona, Especialidad, Exequatur, TarifaConsulta) " +
-                                         "VALUES (@IDPersona, @Especialidad, @Exequatur, @Tarifa)";
+                    // ---------------------------------------------------
+                    // PASO 2: INSERTAR EN 'Doctor' (Con tus parámetros exactos)
+                    // ---------------------------------------------------
+                    string queryDoctor = @"INSERT INTO Doctor 
+                                          (IDPersona, Especialidad, Exequatur, TarifaConsulta) 
+                                          VALUES 
+                                          (@IDPersona, @Especialidad, @Exequatur, @Tarifa)";
 
                     SqlCommand cmdDoctor = new SqlCommand(queryDoctor, conn, transaction);
-                    cmdDoctor.Parameters.AddWithValue("@IDPersona", idPersonaGenerado);
-                    cmdDoctor.Parameters.AddWithValue("@Especialidad", especialidad);
-                    cmdDoctor.Parameters.AddWithValue("@Exequatur", exequatur);
-                    cmdDoctor.Parameters.AddWithValue("@Tarifa", tarifa);
+                    cmdDoctor.Parameters.AddWithValue("@IDPersona", idPersonaGenerado); // FK_Doctor_Persona
+                    cmdDoctor.Parameters.AddWithValue("@Especialidad", especialidad);   // NVARCHAR(100)
+                    cmdDoctor.Parameters.AddWithValue("@Exequatur", exequatur);         // NVARCHAR(100)
+                    cmdDoctor.Parameters.AddWithValue("@Tarifa", tarifa);               // DECIMAL(10,2)
 
                     cmdDoctor.ExecuteNonQuery();
+
+                    // ---------------------------------------------------
+                    // PASO 3: INSERTAR EN 'Usuarios'
+                    // ---------------------------------------------------
+                    string queryUsuario = "INSERT INTO Usuarios (NombreUsuario, Clave, NivelAcceso) " +
+                                          "VALUES (@User, @Pass, 'Doctor')";
+
+                    SqlCommand cmdUsuario = new SqlCommand(queryUsuario, conn, transaction);
+                    cmdUsuario.Parameters.AddWithValue("@User", usuario);
+                    cmdUsuario.Parameters.AddWithValue("@Pass", clave);
+                    cmdUsuario.ExecuteNonQuery();
+
+                    // Confirmar todo
                     transaction.Commit();
-                }
-                catch (SqlException sqlEx)
-                {
-                    transaction.Rollback();
-                    if (sqlEx.Number == 2627 || sqlEx.Number == 2601)
-                        throw new Exception("Error: Ya existe un médico con esa Cédula.");
-                    else
-                        throw new Exception("Error SQL: " + sqlEx.Message);
                 }
                 catch (Exception ex)
                 {
+                    // Si falla algo, deshacemos todo
                     transaction.Rollback();
-                    throw new Exception("Error al guardar doctor: " + ex.Message);
+                    throw new Exception("Error al registrar doctor: " + ex.Message);
                 }
             }
         }

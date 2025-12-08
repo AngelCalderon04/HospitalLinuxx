@@ -134,6 +134,7 @@
             button1.TabIndex = 7;
             button1.Text = "AGREGAR PERSONAL";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_2;
             // 
             // label2
             // 

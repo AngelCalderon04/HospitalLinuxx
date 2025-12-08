@@ -90,5 +90,11 @@ namespace CapaPresentacion
         {
 
         }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            FormRegistrarDoctor form = new FormRegistrarDoctor();
+            form.ShowDialog();
+        }
     }
 }
