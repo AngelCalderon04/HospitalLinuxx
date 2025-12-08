@@ -8,24 +8,28 @@ namespace CapaDatos
     {
         private ConexionDatos conexion = new ConexionDatos();
 
-  
+        // MODIFICADO: Agregamos 'usuario' y 'clave' para el Login
         public void RegistrarEnfermero(
             string nombre, string cedula, string telefono, string email,
-            string turno, string area)
+            string turno, string area,
+            string usuario, string clave)
         {
             using (SqlConnection conn = conexion.ObtenerConexion())
             {
                 conn.Open();
-             
+
+                // INICIO TRANSACCIÓN (Todo o Nada)
                 SqlTransaction transaction = conn.BeginTransaction();
 
                 try
                 {
                     int idPersonaGenerado = 0;
 
-                    // INSERTAR EN PERSONAS Rol = 'Enfermero'
-                    string queryPersona = "INSERT INTO Personas (Nombre, Cedula, Telefono, Email, Rol) " +
-                                          "VALUES (@Nombre, @Cedula, @Telefono, @Email, 'Enfermero'); " +
+                    // ---------------------------------------------------
+                    // PASO 1: INSERTAR EN 'Personas'
+                    // ---------------------------------------------------
+                    string queryPersona = "INSERT INTO Personas (Nombre, Cedula, Telefono, Email, Rol, FechaRegistro) " +
+                                          "VALUES (@Nombre, @Cedula, @Telefono, @Email, 'Enfermero', GETDATE()); " +
                                           "SELECT CAST(SCOPE_IDENTITY() AS INT);";
 
                     SqlCommand cmdPersona = new SqlCommand(queryPersona, conn, transaction);
@@ -36,7 +40,9 @@ namespace CapaDatos
 
                     idPersonaGenerado = (int)cmdPersona.ExecuteScalar();
 
-                    // INSERTAR EN ENFERMERO
+                    // ---------------------------------------------------
+                    // PASO 2: INSERTAR EN 'Enfermero'
+                    // ---------------------------------------------------
                     string queryEnfermero = "INSERT INTO Enfermero (IDPersona, Turno, Area) " +
                                             "VALUES (@IDPersona, @Turno, @Area)";
 
@@ -47,6 +53,17 @@ namespace CapaDatos
 
                     cmdEnfermero.ExecuteNonQuery();
 
+                    // ---------------------------------------------------
+                    // PASO 3: INSERTAR EN 'Usuarios' (¡NUEVO!)
+                    // ---------------------------------------------------
+                    string queryUsuario = "INSERT INTO Usuarios (NombreUsuario, Clave, NivelAcceso) " +
+                                          "VALUES (@User, @Pass, 'Enfermero')";
+
+                    SqlCommand cmdUsuario = new SqlCommand(queryUsuario, conn, transaction);
+                    cmdUsuario.Parameters.AddWithValue("@User", usuario);
+                    cmdUsuario.Parameters.AddWithValue("@Pass", clave);
+                    cmdUsuario.ExecuteNonQuery();
+
                     // Confirmar cambios
                     transaction.Commit();
                 }
@@ -54,7 +71,7 @@ namespace CapaDatos
                 {
                     transaction.Rollback();
                     if (sqlEx.Number == 2627 || sqlEx.Number == 2601)
-                        throw new Exception("Error: Ya existe alguien con esa Cédula.");
+                        throw new Exception("Error: Ya existe esa Cédula o ese Usuario.");
                     else
                         throw new Exception("Error SQL: " + sqlEx.Message);
                 }

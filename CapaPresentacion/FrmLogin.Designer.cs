@@ -163,6 +163,7 @@
             Controls.Add(pictureBox1);
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
+            Load += FrmLogin_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();

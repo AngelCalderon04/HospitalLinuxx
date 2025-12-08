@@ -77,24 +77,24 @@ namespace CapaPresentacion
         private void FormGestionCitas_Load(object sender, EventArgs e)
         {
 
-            this.CenterToScreen();
-
-            // Configurar ComboBoxes con autocompletado
-            cboPaciente.DropDownStyle = ComboBoxStyle.DropDown;
-            cboPaciente.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cboPaciente.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            cboDoctor.DropDownStyle = ComboBoxStyle.DropDown;
-            cboDoctor.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            cboDoctor.AutoCompleteSource = AutoCompleteSource.CustomSource;
-
-            // Llenar ComboBoxes
+            // --- AQUÍ ESTÁN TUS CARGAS DE DATOS (NO LAS BORRES) ---
             CargarComboPacientes();
             CargarComboDoctores();
+            CargarGridCitasData();
 
-            // Cargar grid de citas para mostrar las existentes
-            CargarGridCitas();
+            // -----------------------------------------------------
+            // --- PEGA ESTAS LÍNEAS AQUÍ, AL FINAL DE TODO: ---
+            // -----------------------------------------------------
 
+            // 1. Deseleccionar los ComboBox (Para que aparezcan vacíos)
+            cboPaciente.SelectedIndex = -1;
+            cboDoctor.SelectedIndex = -1;
+
+            // 2. Quitar la franja azul de la tabla (Si tienes datos)
+            dgvCitas.ClearSelection();
+
+            // 3. Quitar el foco para que no parpadee el cursor en la primera caja
+            this.ActiveControl = null;
 
 
         }
