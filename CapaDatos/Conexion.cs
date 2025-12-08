@@ -8,7 +8,7 @@ namespace CapaDatos
     {
         // Cadena de conexión usando (localdb)\MSSQLLocalDB
         private string cadenaConexion =
-            "Server=(localdb)\\MSSQLLocalDB;Database=HospitalLinux;Integrated Security=True;TrustServerCertificate=True;";
+            "Server=.;Database=HospitalLinux;Integrated Security=True;TrustServerCertificate=True;";
 
         public SqlConnection ObtenerConexion()
         {
