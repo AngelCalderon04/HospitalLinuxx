@@ -123,32 +123,35 @@
             // 
             // btnAgendar
             // 
+            btnAgendar.BackColor = Color.PaleGreen;
             btnAgendar.Location = new Point(80, 475);
             btnAgendar.Name = "btnAgendar";
-            btnAgendar.Size = new Size(112, 34);
+            btnAgendar.Size = new Size(130, 34);
             btnAgendar.TabIndex = 11;
             btnAgendar.Text = "AGENDAR";
-            btnAgendar.UseVisualStyleBackColor = true;
+            btnAgendar.UseVisualStyleBackColor = false;
             btnAgendar.Click += btnAgendar_Click;
             // 
             // btnLimpiar
             // 
+            btnLimpiar.BackColor = Color.MistyRose;
             btnLimpiar.Location = new Point(231, 475);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(112, 34);
             btnLimpiar.TabIndex = 12;
             btnLimpiar.Text = "LIMPIAR";
-            btnLimpiar.UseVisualStyleBackColor = true;
+            btnLimpiar.UseVisualStyleBackColor = false;
             btnLimpiar.Click += btnLimpiar_Click;
             // 
             // btnCancelar
             // 
+            btnCancelar.BackColor = Color.LightCoral;
             btnCancelar.Location = new Point(231, 541);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(112, 34);
             btnCancelar.TabIndex = 13;
             btnCancelar.Text = "CANCELAR";
-            btnCancelar.UseVisualStyleBackColor = true;
+            btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
             // 
             // lblListaCitas
@@ -197,12 +200,14 @@
             // 
             // button1
             // 
+            button1.BackColor = SystemColors.ActiveCaption;
             button1.Location = new Point(80, 541);
             button1.Name = "button1";
-            button1.Size = new Size(112, 34);
+            button1.Size = new Size(130, 34);
             button1.TabIndex = 18;
             button1.Text = "EDITAR";
-            button1.UseVisualStyleBackColor = true;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
             // panel1
             // 
@@ -244,6 +249,7 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "$3,500.00" });
             comboBox1.Location = new Point(124, 265);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(277, 33);
