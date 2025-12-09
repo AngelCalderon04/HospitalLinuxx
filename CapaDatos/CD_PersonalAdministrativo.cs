@@ -75,7 +75,6 @@ namespace CapaDatos
             }
         }
 
-        // (Tus otros métodos Actualizar y Listar pueden quedarse igual)
-        // ...
+      
     }
 }

@@ -52,10 +52,12 @@
             // comboCargo
             // 
             comboCargo.FormattingEnabled = true;
-            comboCargo.Location = new Point(194, 257);
+            comboCargo.Items.AddRange(new object[] { "Administrador General", "Subadministrador", "Director de Recursos Humanos", "Analista de Recursos Humanos", "Gerente Financiero", "Contador", "Auxiliar Contable", "Encargado de Compras", "Auxiliar de Compras", "Jefe de Archivo Clínico", "Técnico de Archivo", "Coordinador de Calidad", "Analista de Calidad", "Encargado de Servicios Generales", "Supervisor de Limpieza", "Especialista en Facturación", "Cajero", "Analista de Cobros", "Recepcionista", "Servicio al Cliente", "Coordinador de Logística", "Técnico de Mantenimiento", "Encargado de Seguridad", "Relacionista Público", "Soporte Técnico", "Administrador de Sistemas" });
+            comboCargo.Location = new Point(186, 335);
             comboCargo.Name = "comboCargo";
             comboCargo.Size = new Size(215, 33);
             comboCargo.TabIndex = 0;
+            comboCargo.SelectedIndexChanged += comboCargo_SelectedIndexChanged;
             // 
             // panel1
             // 
@@ -91,7 +93,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label3.Location = new Point(81, 331);
+            label3.Location = new Point(94, 270);
             label3.Name = "label3";
             label3.Size = new Size(80, 23);
             label3.TabIndex = 3;
@@ -101,7 +103,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label4.Location = new Point(71, 265);
+            label4.Location = new Point(71, 335);
             label4.Name = "label4";
             label4.Size = new Size(90, 23);
             label4.TabIndex = 4;
@@ -149,7 +151,7 @@
             // 
             // textCedula
             // 
-            textCedula.Location = new Point(194, 196);
+            textCedula.Location = new Point(186, 192);
             textCedula.Name = "textCedula";
             textCedula.PlaceholderText = "CEDULA";
             textCedula.Size = new Size(215, 31);
@@ -158,7 +160,8 @@
             // comboDepartamento
             // 
             comboDepartamento.FormattingEnabled = true;
-            comboDepartamento.Location = new Point(196, 331);
+            comboDepartamento.Items.AddRange(new object[] { "Administración General", "Recursos Humanos", "Finanzas / Contabilidad", "Compras y Suministros", "Archivo Clínico", "Gestión de Calidad", "Planificación y Desarrollo", "Servicios Generales", "Tecnología de la Información (TI)", "Facturación y Cobros", "Atención al Usuario", "Gestión de Riesgos", "Logística", "Mantenimiento", "Seguridad", "Relaciones Públicas" });
+            comboDepartamento.Location = new Point(188, 270);
             comboDepartamento.Name = "comboDepartamento";
             comboDepartamento.Size = new Size(213, 33);
             comboDepartamento.TabIndex = 10;

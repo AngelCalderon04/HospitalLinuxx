@@ -90,5 +90,10 @@ namespace CapaPresentacion
             // Quitar foco inicial
             this.ActiveControl = null;
         }
+
+        private void comboCargo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
