@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CapaDatos;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaDatos;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 //INICIO
 namespace CapaPresentacion
@@ -19,7 +20,7 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private async void btnIngresar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -28,6 +29,16 @@ namespace CapaPresentacion
                 {
                     MessageBox.Show("Ingrese usuario y contraseña", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
+                }
+
+                progressBar1.Value = 0;
+                progressBar1.Visible = true;
+                progressBar1.Maximum = 100;
+
+                for (int i = 0; i <= 100; i++)
+                {
+                    progressBar1.Value = i;
+                    await Task.Delay(50);
                 }
 
                 // 2. Llamar a la Capa de Datos
@@ -46,6 +57,8 @@ namespace CapaPresentacion
                     txtClave.Clear();
                     txtUsuario.Focus();
                 }
+
+                progressBar1.Visible = false;
             }
             catch (Exception ex)
             {
@@ -85,6 +98,11 @@ namespace CapaPresentacion
         private void FrmLogin_Load(object sender, EventArgs e)
         {
             label3.Focus();
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

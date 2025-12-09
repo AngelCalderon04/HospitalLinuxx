@@ -1,4 +1,8 @@
-﻿using System;
+﻿using CapaDatos;
+using Doctor;
+using Microsoft.Data.SqlClient;
+using Personas;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,33 +12,26 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaDatos;
-using Microsoft.Data.SqlClient;
-using Personas;
-using Doctor;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CapaPresentacion
 {
 
     public partial class GestionCitas : Form
-
-
     {
-
-        // Variables para controlar la edición
         private bool Editar = false;
         private int IDCitaSeleccionada = 0;
+
         public GestionCitas()
         {
             InitializeComponent();
+            progressBar1.Visible = false;
         }
 
         private void CargarComboPacientes()
         {
-            // Usamos la clase de conexión "CapaDatos"
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-                // El  SQL DEBE TRAER LA COLUMNA IDPaciente EXPLICITAMENTE
                 string sql = @"SELECT P.IDPaciente, Per.Nombre 
                        FROM Paciente P 
                        INNER JOIN Personas Per ON P.IDPersona = Per.IDPersona";
@@ -43,12 +40,11 @@ namespace CapaPresentacion
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                //el orden correcto 
                 cboPaciente.DisplayMember = "Nombre";
                 cboPaciente.ValueMember = "IDPaciente";
                 cboPaciente.DataSource = dt;
 
-                cboPaciente.SelectedIndex = -1; // Limpiar selección inicial
+                cboPaciente.SelectedIndex = -1;
             }
         }
 
@@ -56,7 +52,6 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-                // SQL con IDDoctor
                 string sql = @"SELECT D.IDDoctor, Per.Nombre 
                        FROM Doctor D 
                        INNER JOIN Personas Per ON D.IDPersona = Per.IDPersona";
@@ -65,7 +60,6 @@ namespace CapaPresentacion
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                // ORDEN CORRECTO
                 cboDoctor.DisplayMember = "Nombre";
                 cboDoctor.ValueMember = "IDDoctor";
                 cboDoctor.DataSource = dt;
@@ -76,46 +70,37 @@ namespace CapaPresentacion
 
         private void FormGestionCitas_Load(object sender, EventArgs e)
         {
-
-            // --- AQUÍ ESTÁN TUS CARGAS DE DATOS (NO LAS BORRES) ---
             CargarComboPacientes();
             CargarComboDoctores();
             CargarGridCitasData();
 
-            // -----------------------------------------------------
-            // --- PEGA ESTAS LÍNEAS AQUÍ, AL FINAL DE TODO: ---
-            // -----------------------------------------------------
-
-            // 1. Deseleccionar los ComboBox (Para que aparezcan vacíos)
             cboPaciente.SelectedIndex = -1;
             cboDoctor.SelectedIndex = -1;
-
-            // 2. Quitar la franja azul de la tabla (Si tienes datos)
             dgvCitas.ClearSelection();
-
-            // 3. Quitar el foco para que no parpadee el cursor en la primera caja
             this.ActiveControl = null;
-
-
         }
 
-
-
-        private void btnAgendar_Click(object sender, EventArgs e)
+        private async void btnAgendar_Click(object sender, EventArgs e)
         {
-            // Validar que haya selección, capturaores 
             if (cboPaciente.SelectedItem == null || cboDoctor.SelectedItem == null)
             {
                 MessageBox.Show("Por favor, seleccione un Paciente y un Doctor.", "Faltan datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            progressBar1.Visible = true;
+            progressBar1.Value = 0;
+
+            for (int i = 0; i <= 100; i++)
+            {
+                progressBar1.Value = i;
+                await Task.Delay(10);
+            }
 
             try
             {
                 CapaDatos.CD_Citas objetoCD = new CapaDatos.CD_Citas();
 
-                // Recogemos datos
                 int idPac = Convert.ToInt32(cboPaciente.SelectedValue);
                 int idDoc = Convert.ToInt32(cboDoctor.SelectedValue);
                 DateTime fecha = dtpFecha.Value;
@@ -123,54 +108,42 @@ namespace CapaPresentacion
 
                 if (Editar == false)
                 {
-                    // --- MODO GUARDAR NUEVO ---
-                    // Como quitaste motivo, enviamos string vacío ""
                     objetoCD.AgendarCita(idPac, idDoc, fecha, hora, "");
                     MessageBox.Show("Cita agendada correctamente.");
                 }
                 else
                 {
-                    // --- MODO EDITAR ---
                     objetoCD.EditarCita(IDCitaSeleccionada, idPac, idDoc, fecha, hora);
                     MessageBox.Show("Cita editada correctamente.");
 
-                    // Volvemos al estado original
                     Editar = false;
                     IDCitaSeleccionada = 0;
-                    btnAgendar.Text = "AGENDAR"; // Regresamos el texto original
+                    btnAgendar.Text = "AGENDAR";
                 }
 
-                // LIMPIEZA FINAL
-                CargarGridCitas(); // Refrescar tabla
-                LimpiarFormulario(); // Método para borrar textos (si tienes)
+                CargarGridCitas();
+                LimpiarFormulario();
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Error: " + ex.Message);
             }
+
+            progressBar1.Visible = false;
         }
 
-        // MÉTODO PARA LIMPIAR CAMPOS
         private void LimpiarFormulario()
         {
-            // 1. Reseteamos los ComboBox para que no tengan nada seleccionado
             cboPaciente.SelectedIndex = -1;
             cboDoctor.SelectedIndex = -1;
-
-            // 2. Reseteamos las fechas al día de hoy
             dtpFecha.Value = DateTime.Now;
             dtpHora.Value = DateTime.Now;
 
-            // 3. Limpiamos cajas de texto (si tienes la de costo o motivo)
-            // txtMotivo.Clear(); // Descomenta si usas motivo
             if (Controls.Find("txtCosto", true).Length > 0)
-                Controls.Find("txtCosto", true)[0].Text = ""; // Limpia costo si existe
+                Controls.Find("txtCosto", true)[0].Text = "";
 
-            // 4. IMPORTANTE: Reseteamos las variables de Edición
             Editar = false;
             IDCitaSeleccionada = 0;
-
-            // 5. Regresamos el botón a su estado original
             btnAgendar.Text = "AGENDAR";
         }
 
@@ -178,7 +151,6 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-                // 1. TU SQL CORREGIDO (Con los IDs ocultos)
                 string sql = @"SELECT 
                     c.IDCita,
                     c.IDPaciente,
@@ -199,41 +171,27 @@ namespace CapaPresentacion
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                // --- INICIO DE LA SOLUCIÓN ---
-
-                // A. Limpiamos cualquier "memoria" vieja de la tabla
                 dgvCitas.DataSource = null;
                 dgvCitas.Columns.Clear();
-
-                // B. Le decimos que genere todo nuevo automáticamente
                 dgvCitas.AutoGenerateColumns = true;
-
-                // C. Le damos los datos frescos
                 dgvCitas.DataSource = dt;
 
-                // --- FIN DE LA SOLUCIÓN ---
-
-                // Ajustes visuales
                 dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvCitas.ReadOnly = true;
 
-                // Ocultar los IDs (Usamos 'Contains' para que no explote si no existen)
                 if (dgvCitas.Columns.Contains("IDPaciente")) dgvCitas.Columns["IDPaciente"].Visible = false;
                 if (dgvCitas.Columns.Contains("IDDoctor")) dgvCitas.Columns["IDDoctor"].Visible = false;
                 if (dgvCitas.Columns.Contains("IDCita")) dgvCitas.Columns["IDCita"].Visible = false;
 
-                // Formato Moneda
                 if (dgvCitas.Columns.Contains("Costo")) dgvCitas.Columns["Costo"].DefaultCellStyle.Format = "C2";
             }
         }
-
 
         private void btnLimpiar_Click(object sender, EventArgs e)
         {
             LimpiarCampos();
         }
-
 
         private void LimpiarCampos()
         {
@@ -241,23 +199,38 @@ namespace CapaPresentacion
             cboDoctor.Text = "";
             dtpFecha.Value = DateTime.Today;
             dtpHora.Value = DateTime.Now;
-            //txtMotivo.Clear();
             cboPaciente.Focus();
         }
-
-
-        private void dvgCitas()
-        {
-
-        }
-
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
-        private void txtPaciente_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (dgvCitas.SelectedRows.Count > 0)
+            {
+                Editar = true;
+                IDCitaSeleccionada = Convert.ToInt32(dgvCitas.CurrentRow.Cells["IDCita"].Value);
+
+                cboPaciente.SelectedValue = Convert.ToInt32(dgvCitas.CurrentRow.Cells["IDPaciente"].Value);
+                cboDoctor.SelectedValue = Convert.ToInt32(dgvCitas.CurrentRow.Cells["IDDoctor"].Value);
+
+                dtpFecha.Value = Convert.ToDateTime(dgvCitas.CurrentRow.Cells["FechaCita"].Value);
+
+                dtpHora.Value = Convert.ToDateTime(dgvCitas.CurrentRow.Cells["FechaCita"].Value).Date +
+                                (TimeSpan)dgvCitas.CurrentRow.Cells["HoraCita"].Value;
+
+                btnAgendar.Text = "ACTUALIZAR";
+            }
+            else
+            {
+                MessageBox.Show("Seleccione una fila para editar.");
+            }
+        }
+
+        private void dgvCitas_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
@@ -268,6 +241,16 @@ namespace CapaPresentacion
         }
 
         private void cboDoctor_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtPaciente_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dvgCitas()
         {
 
         }
@@ -312,11 +295,10 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-                // 1. AGREGAMOS c.IDPaciente Y c.IDDoctor AL SELECT
                 string sql = @"SELECT 
             c.IDCita,
-            c.IDPaciente,   -- <--- ¡ESTO ES LO QUE TE FALTA!
-            c.IDDoctor,     -- <--- ¡ESTO TAMBIÉN!
+            c.IDPaciente,
+            c.IDDoctor,
             pe.Nombre AS Paciente,
             dpe.Nombre AS Doctor,
             c.FechaCita,
@@ -325,7 +307,7 @@ namespace CapaPresentacion
         
         FROM Citas c
         INNER JOIN Paciente p ON c.IDPaciente = p.IDPaciente
-        INNER JOIN Personas pe ON p.IDPersona = pe.IDPersona
+        INNER INNER JOIN Personas pe ON p.IDPersona = pe.IDPersona
         INNER JOIN Doctor d ON c.IDDoctor = d.IDDoctor
         INNER JOIN Personas dpe ON d.IDPersona = dpe.IDPersona
         ORDER BY c.FechaCita, c.HoraCita";
@@ -336,58 +318,20 @@ namespace CapaPresentacion
 
                 dgvCitas.DataSource = dt;
 
-                // Ajustes opcionales
                 dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvCitas.ReadOnly = true;
 
-                // 2. OCULTAMOS LOS ID PARA QUE NO SE VEAN FEOS EN LA TABLA
-                // (El dato está ahí para que lo usemos, pero el usuario no lo ve)
                 if (dgvCitas.Columns.Contains("IDPaciente")) dgvCitas.Columns["IDPaciente"].Visible = false;
                 if (dgvCitas.Columns.Contains("IDDoctor")) dgvCitas.Columns["IDDoctor"].Visible = false;
 
-                // Formato moneda para el costo (si lo tienes)
                 if (dgvCitas.Columns.Contains("Costo")) dgvCitas.Columns["Costo"].DefaultCellStyle.Format = "C2";
             }
         }
 
-        private void dgvCitas_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void progressBar1_Click(object sender, EventArgs e)
         {
 
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // Verificamos si seleccionó una fila
-            if (dgvCitas.SelectedRows.Count > 0)
-            {
-                // 1. Cambiamos el modo a "EDITAR"
-                Editar = true;
-
-                // 2. Desbloqueamos controles (si usaste el método de bloqueo)
-                // HabilitarControles(true); 
-
-                // 3. Obtenemos el ID de la cita seleccionada
-                IDCitaSeleccionada = Convert.ToInt32(dgvCitas.CurrentRow.Cells["IDCita"].Value);
-
-                // 4. Rellenamos los campos con los datos de la tabla
-                // NOTA: Asegúrate de que los nombres "IDPaciente" coincidan con tu SQL del Paso 2
-                cboPaciente.SelectedValue = Convert.ToInt32(dgvCitas.CurrentRow.Cells["IDPaciente"].Value);
-                cboDoctor.SelectedValue = Convert.ToInt32(dgvCitas.CurrentRow.Cells["IDDoctor"].Value);
-
-                dtpFecha.Value = Convert.ToDateTime(dgvCitas.CurrentRow.Cells["FechaCita"].Value);
-                // Para la hora, convertimos el string o TimeSpan
-                dtpHora.Value = Convert.ToDateTime(dgvCitas.CurrentRow.Cells["FechaCita"].Value).Date +
-                                (TimeSpan)dgvCitas.CurrentRow.Cells["HoraCita"].Value;
-
-                // Cambiamos el texto del botón Guardar para dar feedback visual
-                btnAgendar.Text = "ACTUALIZAR";
-            }
-            else
-            {
-                MessageBox.Show("Seleccione una fila para editar.");
-            }
         }
     }
-
 }

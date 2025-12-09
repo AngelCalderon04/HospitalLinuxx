@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CapaPresentacion
 {
@@ -17,10 +18,10 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async void button1_Click(object sender, EventArgs e)
         {// 1. VALIDACIÓN: Agregamos txtCedula a la lista de obligatorios
             if (string.IsNullOrWhiteSpace(textDoctor.Text) ||
-                string.IsNullOrWhiteSpace(textCedula.Text) || // <--- NUEVO
+                string.IsNullOrWhiteSpace(textCedula.Text) ||
                 string.IsNullOrWhiteSpace(txtespecialidad.Text) ||
                 string.IsNullOrWhiteSpace(textExequatur.Text) ||
                 string.IsNullOrWhiteSpace(textTarifa.Text) ||
@@ -31,7 +32,6 @@ namespace CapaPresentacion
                 return;
             }
 
-            // 2. CONVERSIÓN TARIFA
             decimal tarifa = 0;
             if (!decimal.TryParse(textTarifa.Text, out tarifa))
             {
@@ -41,24 +41,33 @@ namespace CapaPresentacion
 
             try
             {
-                // 3. LLAMADA A LA CAPA DE DATOS
+                progressBar1.Value = 0;
+                progressBar1.Visible = true;
+                progressBar1.Maximum = 100;
+
+                for (int i = 0; i <= 100; i++)
+                {
+                    progressBar1.Value = i;
+                    await Task.Delay(30); // 3 segundos
+                }
+
                 CapaDatos.CD_Doctor objetoDoctor = new CapaDatos.CD_Doctor();
 
                 objetoDoctor.RegistrarDoctor(
-                    textDoctor.Text.Trim(),      // Nombre
-                    textCedula.Text.Trim(),      // <--- AQUÍ ENVIAMOS LA CÉDULA REAL AHORA
-                    "",                         // Telefono (Sigue vacío si no lo tienes)
-                    "",                         // Email (Sigue vacío si no lo tienes)
-                    txtespecialidad.Text.Trim(),// Especialidad
-                    textExequatur.Text.Trim(),   // Exequatur
-                    tarifa,                     // Tarifa
-                    textusuario.Text.Trim(),     // Usuario
-                    textClave.Text.Trim()        // Clave
+                    textDoctor.Text.Trim(),
+                    textCedula.Text.Trim(),
+                    "",
+                    "",
+                    txtespecialidad.Text.Trim(),
+                    textExequatur.Text.Trim(),
+                    tarifa,
+                    textusuario.Text.Trim(),
+                    textClave.Text.Trim()
                 );
 
-                // 4. CONFIRMACIÓN
                 MessageBox.Show("¡Doctor registrado correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+                progressBar1.Visible = false;
             }
             catch (Exception ex)
             {
@@ -68,7 +77,7 @@ namespace CapaPresentacion
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close(); // Cierra el formulario actual
+            this.Close();
         }
 
         private void label2_Click(object sender, EventArgs e)
@@ -77,6 +86,11 @@ namespace CapaPresentacion
         }
 
         private void lblEspecialidad_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
         {
 
         }

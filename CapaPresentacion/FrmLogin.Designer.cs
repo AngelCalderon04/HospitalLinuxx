@@ -37,6 +37,7 @@
             label3 = new Label();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
+            progressBar1 = new ProgressBar();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -45,30 +46,33 @@
             // 
             txtClave.BorderStyle = BorderStyle.FixedSingle;
             txtClave.Font = new Font("Century Gothic", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtClave.Location = new Point(396, 197);
+            txtClave.Location = new Point(317, 158);
+            txtClave.Margin = new Padding(2);
             txtClave.Name = "txtClave";
             txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = "CLAVE";
-            txtClave.Size = new Size(150, 27);
+            txtClave.Size = new Size(120, 24);
             txtClave.TabIndex = 0;
             // 
             // txtUsuario
             // 
             txtUsuario.BorderStyle = BorderStyle.FixedSingle;
             txtUsuario.Font = new Font("Century Gothic", 8F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            txtUsuario.Location = new Point(396, 139);
+            txtUsuario.Location = new Point(317, 111);
+            txtUsuario.Margin = new Padding(2);
             txtUsuario.Name = "txtUsuario";
             txtUsuario.PlaceholderText = "USUARIO";
-            txtUsuario.Size = new Size(150, 27);
+            txtUsuario.Size = new Size(120, 24);
             txtUsuario.TabIndex = 1;
             // 
             // btnIngresar
             // 
             btnIngresar.BackColor = SystemColors.InactiveBorder;
             btnIngresar.Font = new Font("Century", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnIngresar.Location = new Point(247, 282);
+            btnIngresar.Location = new Point(198, 226);
+            btnIngresar.Margin = new Padding(2);
             btnIngresar.Name = "btnIngresar";
-            btnIngresar.Size = new Size(128, 34);
+            btnIngresar.Size = new Size(102, 27);
             btnIngresar.TabIndex = 2;
             btnIngresar.Text = "INGRESAR ";
             btnIngresar.UseVisualStyleBackColor = false;
@@ -78,9 +82,10 @@
             // 
             btnCancelar.BackColor = SystemColors.InactiveBorder;
             btnCancelar.Font = new Font("Century", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnCancelar.Location = new Point(434, 282);
+            btnCancelar.Location = new Point(347, 226);
+            btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(134, 34);
+            btnCancelar.Size = new Size(107, 27);
             btnCancelar.TabIndex = 3;
             btnCancelar.Text = "CANCELAR ";
             btnCancelar.UseVisualStyleBackColor = false;
@@ -93,9 +98,10 @@
             label1.BorderStyle = BorderStyle.Fixed3D;
             label1.FlatStyle = FlatStyle.System;
             label1.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label1.Location = new Point(247, 139);
+            label1.Location = new Point(198, 111);
+            label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(115, 25);
+            label1.Size = new Size(100, 23);
             label1.TabIndex = 4;
             label1.Text = "USUARIO:";
             label1.TextAlign = ContentAlignment.TopRight;
@@ -108,9 +114,10 @@
             label2.BorderStyle = BorderStyle.Fixed3D;
             label2.FlatStyle = FlatStyle.System;
             label2.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            label2.Location = new Point(275, 197);
+            label2.Location = new Point(220, 158);
+            label2.Margin = new Padding(2, 0, 2, 0);
             label2.Name = "label2";
-            label2.Size = new Size(87, 25);
+            label2.Size = new Size(76, 23);
             label2.TabIndex = 5;
             label2.Text = "CLAVE:";
             // 
@@ -121,9 +128,10 @@
             label3.FlatStyle = FlatStyle.Flat;
             label3.Font = new Font("Century", 16F, FontStyle.Bold, GraphicsUnit.Point, 0);
             label3.ForeColor = SystemColors.ButtonFace;
-            label3.Location = new Point(157, 17);
+            label3.Location = new Point(126, 14);
+            label3.Margin = new Padding(2, 0, 2, 0);
             label3.Name = "label3";
-            label3.Size = new Size(320, 38);
+            label3.Size = new Size(274, 33);
             label3.TabIndex = 7;
             label3.Text = "HOSPITAL LINUX";
             label3.TextAlign = ContentAlignment.MiddleCenter;
@@ -134,25 +142,37 @@
             panel1.BackColor = Color.RoyalBlue;
             panel1.Controls.Add(label3);
             panel1.Location = new Point(0, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(675, 77);
+            panel1.Size = new Size(540, 62);
             panel1.TabIndex = 8;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = Properties.Resources._new;
-            pictureBox1.Location = new Point(-13, 48);
+            pictureBox1.Location = new Point(-10, 38);
+            pictureBox1.Margin = new Padding(2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(241, 286);
+            pictureBox1.Size = new Size(193, 229);
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(198, 266);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(307, 21);
+            progressBar1.TabIndex = 10;
+            progressBar1.Visible = false;
+            progressBar1.Click += progressBar1_Click;
+            // 
             // FrmLogin
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(672, 374);
+            ClientSize = new Size(538, 299);
+            Controls.Add(progressBar1);
             Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -161,6 +181,7 @@
             Controls.Add(txtUsuario);
             Controls.Add(txtClave);
             Controls.Add(pictureBox1);
+            Margin = new Padding(2);
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;
             Load += FrmLogin_Load;
@@ -182,5 +203,6 @@
         private Label label3;
         private Panel panel1;
         private PictureBox pictureBox1;
+        private ProgressBar progressBar1;
     }
 }

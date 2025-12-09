@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CapaPresentacion
 {
@@ -15,22 +16,40 @@ namespace CapaPresentacion
         public FormAGREGAR()
         {
             InitializeComponent();
+            progressBar1.Visible = false;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private async Task MostrarCargaAsync()
         {
+            progressBar1.Visible = true;
+            progressBar1.Value = 0;
+
+            for (int i = 0; i < 100; i++)
+            {
+                await Task.Delay(30);
+                progressBar1.Value = i;
+            }
+
+            progressBar1.Visible = false;
+        }
+
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            await MostrarCargaAsync();
             FormRegistrarDoctor form = new FormRegistrarDoctor();
             form.ShowDialog();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private async void button2_Click(object sender, EventArgs e)
         {
+            await MostrarCargaAsync();
             RegistrarEnfermero form = new RegistrarEnfermero();
             form.ShowDialog();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private async void button3_Click(object sender, EventArgs e)
         {
+            await MostrarCargaAsync();
             ReistrarPersonalADMIN form = new ReistrarPersonalADMIN();
             form.ShowDialog();
         }
@@ -38,6 +57,11 @@ namespace CapaPresentacion
         private void button4_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
