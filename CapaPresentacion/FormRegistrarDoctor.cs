@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CapaPresentacion
 {
@@ -17,12 +18,11 @@ namespace CapaPresentacion
             InitializeComponent();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            // 1. VALIDACIÓN
-            // CORRECCIÓN: Fíjate que el paréntesis de cierre del IF ')' está AL FINAL de todo.
+        private async void button1_Click(object sender, EventArgs e)
+        {// 1. VALIDACIÓN: Agregamos txtCedula a la lista de obligatorios
             if (string.IsNullOrWhiteSpace(textDoctor.Text) ||
                 string.IsNullOrWhiteSpace(textCedula.Text) ||
+                string.IsNullOrWhiteSpace(txtespecialidad.Text) ||
                 string.IsNullOrWhiteSpace(textExequatur.Text) ||
                 string.IsNullOrWhiteSpace(textTarifa.Text) ||
                 string.IsNullOrWhiteSpace(textusuario.Text) ||
@@ -33,7 +33,6 @@ namespace CapaPresentacion
                 return;
             }
 
-            // CONVERSIÓN TARIFA
             decimal tarifa = 0;
             if (!decimal.TryParse(textTarifa.Text, out tarifa))
             {
@@ -43,24 +42,33 @@ namespace CapaPresentacion
 
             try
             {
-                // LLAMADA A LA CAPA DE DATOS
+                progressBar1.Value = 0;
+                progressBar1.Visible = true;
+                progressBar1.Maximum = 100;
+
+                for (int i = 0; i <= 100; i++)
+                {
+                    progressBar1.Value = i;
+                    await Task.Delay(30); // 3 segundos
+                }
+
                 CapaDatos.CD_Doctor objetoDoctor = new CapaDatos.CD_Doctor();
 
                 objetoDoctor.RegistrarDoctor(
-                    textDoctor.Text.Trim(),       // Nombre
-                    textCedula.Text.Trim(),       // Cédula
-                    "",                           // Telefono (Vacío)
-                    "",                           // Email (Vacío)
-                    cboEspecialidad.Text,         // <--- USAMOS EL TEXTO DEL COMBOBOX
-                    textExequatur.Text.Trim(),    // Exequatur
-                    tarifa,                       // Tarifa
-                    textusuario.Text.Trim(),      // Usuario
-                    textClave.Text.Trim()         // Clave
+                    textDoctor.Text.Trim(),
+                    textCedula.Text.Trim(),
+                    "",
+                    "",
+                    txtespecialidad.Text.Trim(),
+                    textExequatur.Text.Trim(),
+                    tarifa,
+                    textusuario.Text.Trim(),
+                    textClave.Text.Trim()
                 );
 
-                // CONFIRMACIÓN
                 MessageBox.Show("¡Doctor registrado correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Close();
+                progressBar1.Visible = false;
             }
             catch (Exception ex)
             {
@@ -70,12 +78,22 @@ namespace CapaPresentacion
 
         private void button2_Click(object sender, EventArgs e)
         {
-            this.Close(); // Cierra el formulario actual
+            this.Close();
         }
 
-        // Estos métodos vacíos los puedes borrar si no los usas, pero no afectan.
-        private void label2_Click(object sender, EventArgs e) { }
-        private void lblEspecialidad_Click(object sender, EventArgs e) { }
-        private void txtespecialidad_TextChanged(object sender, EventArgs e) { }
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblEspecialidad_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

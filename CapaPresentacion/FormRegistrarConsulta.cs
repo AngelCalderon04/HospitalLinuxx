@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CapaDatos;
+using Microsoft.Data.SqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,8 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using CapaDatos;
-using Microsoft.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CapaPresentacion
 {
@@ -18,8 +19,6 @@ namespace CapaPresentacion
         {
             InitializeComponent();
         }
-
-
 
         private void FormRegistrarConsulta_Load(object sender, EventArgs e)
         {
@@ -56,7 +55,6 @@ namespace CapaPresentacion
                     cboPaciente.ValueMember = "IDPaciente";
                     cboPaciente.SelectedIndex = -1;
 
-                    // Autocompletado
                     AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
                     foreach (DataRow row in dt.Rows) auto.Add(row["Nombre"].ToString());
                     cboPaciente.AutoCompleteCustomSource = auto;
@@ -81,16 +79,14 @@ namespace CapaPresentacion
                 cboDoctor.ValueMember = "IDDoctor";
                 cboDoctor.SelectedIndex = -1;
 
-                // Autocompletado
                 AutoCompleteStringCollection auto = new AutoCompleteStringCollection();
                 foreach (DataRow row in dt.Rows) auto.Add(row["Nombre"].ToString());
                 cboDoctor.AutoCompleteCustomSource = auto;
             }
         }
 
-        private void btnGuardar_Click(object sender, EventArgs e)
+        private async void btnGuardar_Click(object sender, EventArgs e)
         {
-            // Validaciones, capturadores de errores 
             if (cboPaciente.SelectedValue == null || cboDoctor.SelectedValue == null)
             {
                 MessageBox.Show("Debe seleccionar un paciente y un doctor.", "Aviso",
@@ -98,15 +94,12 @@ namespace CapaPresentacion
                 return;
             }
 
-            // Obtener datos del formulario
             int idPaciente = Convert.ToInt32(cboPaciente.SelectedValue);
             int idDoctor = Convert.ToInt32(cboDoctor.SelectedValue);
             string motivo = txtMotivo.Text.Trim();
             string diagnostico = txtDiagnostico.Text.Trim();
             string tratamiento = txtTratamiento.Text.Trim();
             string observaciones = txtObservaciones.Text.Trim();
-
-            //Capturador de error 
 
             if (string.IsNullOrEmpty(motivo))
             {
@@ -117,14 +110,22 @@ namespace CapaPresentacion
 
             try
             {
-                //Aqui llama de la capaDatos los query 
-                CD_HistorialMedico gestor = new CD_HistorialMedico();
+                progressBar1.Value = 0;
+                progressBar1.Visible = true;
+                progressBar1.Maximum = 100;
 
+                for (int i = 0; i <= 100; i++)
+                {
+                    progressBar1.Value = i;
+                    await Task.Delay(30);     // 30ms * 100 = 3000 ms (3 segundos)
+                }
+
+                CD_HistorialMedico gestor = new CD_HistorialMedico();
 
                 gestor.RegistrarConsulta(
                     idPaciente,
                     idDoctor,
-                    motivo,       // Esto corresponde a sintomas 
+                    motivo,
                     diagnostico,
                     tratamiento,
                     observaciones
@@ -134,6 +135,7 @@ namespace CapaPresentacion
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarCampos();
+                progressBar1.Visible = false;
             }
             catch (Exception ex)
             {
@@ -141,7 +143,6 @@ namespace CapaPresentacion
                     "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
 
         private void LimpiarCampos()
         {
@@ -172,10 +173,10 @@ namespace CapaPresentacion
         {
 
         }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
-
-
-
-
 }
-

@@ -324,32 +324,64 @@ namespace CapaPresentacion
 
         private void CargarGridCitasData()
         {
-            using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
+            try
             {
-                // 1. AGREGAMOS c.IDPaciente Y c.IDDoctor AL SELECT
-                string sql = @"SELECT 
-            c.IDCita,
-            c.IDPaciente,   -- <--- ¡ESTO ES LO QUE TE FALTA!
-            c.IDDoctor,     -- <--- ¡ESTO TAMBIÉN!
-            pe.Nombre AS Paciente,
-            dpe.Nombre AS Doctor,
-            c.FechaCita,
-            c.HoraCita,
-            d.TarifaConsulta AS Costo
-        
-        FROM Citas c
-        INNER JOIN Paciente p ON c.IDPaciente = p.IDPaciente
-        INNER JOIN Personas pe ON p.IDPersona = pe.IDPersona
-        INNER JOIN Doctor d ON c.IDDoctor = d.IDDoctor
-        INNER JOIN Personas dpe ON d.IDPersona = dpe.IDPersona
-        ORDER BY c.FechaCita, c.HoraCita";
+                using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
+                {
+                    // SQL LIMPIO (Sin comentarios para evitar errores)
+                    string sql = @"SELECT 
+                        c.IDCita,
+                        c.IDPaciente,
+                        c.IDDoctor,
+                        pe.Nombre AS Paciente,
+                        dpe.Nombre AS Doctor,
+                        c.FechaCita,
+                        c.HoraCita,
+                        d.TarifaConsulta AS Costo
+                    FROM Citas c
+                    INNER JOIN Paciente p ON c.IDPaciente = p.IDPaciente
+                    INNER JOIN Personas pe ON p.IDPersona = pe.IDPersona
+                    INNER JOIN Doctor d ON c.IDDoctor = d.IDDoctor
+                    INNER JOIN Personas dpe ON d.IDPersona = dpe.IDPersona
+                    ORDER BY c.FechaCita DESC";
 
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+                    SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                    DataTable dt = new DataTable();
+                    da.Fill(dt);
 
-                dgvCitas.DataSource = dt;
+                    // PRUEBA: Si no ves este mensaje, es que este código NO se está ejecutando
+                    // MessageBox.Show("Filas encontradas: " + dt.Rows.Count); 
 
+<<<<<<< HEAD
+                    // 1. Limpiamos todo
+                    dgvCitas.DataSource = null;
+                    dgvCitas.Columns.Clear();
+
+                    // 2. Activamos la magia automática
+                    dgvCitas.AutoGenerateColumns = true;
+
+                    // 3. Ponemos los datos
+                    dgvCitas.DataSource = dt;
+
+                    // 4. Ajustes Visuales
+                    dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+                    dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+                    dgvCitas.ReadOnly = true;
+
+                    // 5. Ocultar columnas técnicas (IDs)
+                    if (dgvCitas.Columns.Contains("IDPaciente")) dgvCitas.Columns["IDPaciente"].Visible = false;
+                    if (dgvCitas.Columns.Contains("IDDoctor")) dgvCitas.Columns["IDDoctor"].Visible = false;
+                    if (dgvCitas.Columns.Contains("IDCita")) dgvCitas.Columns["IDCita"].Visible = false;
+
+                    // 6. Formato de Dinero
+                    if (dgvCitas.Columns.Contains("Costo"))
+                        dgvCitas.Columns["Costo"].DefaultCellStyle.Format = "C2";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error al cargar la tabla: " + ex.Message);
+=======
                  //TODO: esteticoss raros de indio 
                 dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
@@ -361,6 +393,7 @@ namespace CapaPresentacion
 
                 // TODO: Formato moneda para el costo (si lo tienes)
                 if (dgvCitas.Columns.Contains("Costo")) dgvCitas.Columns["Costo"].DefaultCellStyle.Format = "C2";
+>>>>>>> 099f093dc396902e414b3c2eec1b23c18b4cab11
             }
         }
 

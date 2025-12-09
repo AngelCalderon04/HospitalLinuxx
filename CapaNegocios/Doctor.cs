@@ -6,12 +6,14 @@ namespace Doctor
     // Hereda de Persona
     public class Doctor : Persona 
     {
-        // Propiedades exclusivas del Doctor
+        // Propiedades exclusivas del Doctorss
+        //mature
+        //mature
         public int IDDoctor { get; set; }
         public string Especialidad { get; set; }
         public string Exequatur { get; set; }
         public decimal TarifaConsulta { get; set; }
-
+        //m
         // Constructor Vacio
         public Doctor() : base() { }
 
