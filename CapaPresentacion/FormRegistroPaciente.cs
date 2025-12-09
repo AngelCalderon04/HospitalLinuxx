@@ -1,6 +1,7 @@
-﻿using System;
+﻿using CapaDatos;
+using System;
 using System.Windows.Forms;
-using CapaDatos; 
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace CapaPresentacion
 {
@@ -26,7 +27,7 @@ namespace CapaPresentacion
         }
 
 
-        private void btnGuargar_Click(object sender, EventArgs e)
+        private async void btnGuargar_Click(object sender, EventArgs e)
         {
             try
             {
@@ -37,6 +38,15 @@ namespace CapaPresentacion
                     return;
                 }
 
+                progressBar1.Value = 0;
+                progressBar1.Visible = true;
+                progressBar1.Maximum = 100;
+
+                for (int i = 0; i <= 100; i++)
+                {
+                    progressBar1.Value = i;
+                    await Task.Delay(30); // 3 segundos
+                }
 
                 decimal peso = 0;
                 decimal altura = 0;
@@ -60,14 +70,13 @@ namespace CapaPresentacion
                     altura == 0 ? (decimal?)null : altura
                 );
 
-
                 MessageBox.Show("¡Paciente registrado correctamente!", "Éxito", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                 LimpiarCampos();
+                progressBar1.Visible = false;
             }
             catch (Exception ex)
             {
-                // Aquí atrapamos el error si la cédula está repetida
                 MessageBox.Show(ex.Message, "Error al Guardar", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -114,7 +123,6 @@ namespace CapaPresentacion
             this.txtAltura.KeyPress += new KeyPressEventHandler(SoloDecimales_KeyPress);
         }
 
-
         private void SoloLetras_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != ' ')
@@ -131,7 +139,7 @@ namespace CapaPresentacion
         {
             if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar) && e.KeyChar != '.')
                 e.Handled = true;
-            if (e.KeyChar == '.' && (sender as TextBox).Text.IndexOf('.') > -1)
+            if (e.KeyChar == '.' && ((sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1))
                 e.Handled = true;
         }
 
@@ -146,6 +154,11 @@ namespace CapaPresentacion
         }
 
         private void txtContactoEmergencia_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
         {
 
         }
