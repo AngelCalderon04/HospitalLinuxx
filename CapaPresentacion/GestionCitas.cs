@@ -55,18 +55,20 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-                // TODO: SQL con IDDoctor
-                string sql = @"SELECT D.IDDoctor, Per.Nombre 
-                       FROM Doctor D 
-                       INNER JOIN Personas Per ON D.IDPersona = Per.IDPersona";
+                conn.Open();
+                // OJO AQUÍ: Estamos pidiendo 3 cosas: ID, Nombre y TARIFA
+                string query = @"SELECT 
+                            d.IDDoctor, 
+                            p.Nombre, 
+                            d.TarifaConsulta 
+                        FROM Doctor d
+                        INNER JOIN Personas p ON d.IDPersona = p.IDPersona";
 
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                // TODO: ORDEN CORRECTO
-                cboDoctor.DisplayMember = "Nombre";
-                cboDoctor.ValueMember = "IDDoctor";
+                // Guardamos TODA la tabla en el combo (aunque solo mostremos el nombre)
                 cboDoctor.DataSource = dt;
                 cboDoctor.DisplayMember = "Nombre";      // Lo que ve el usuario
                 cboDoctor.ValueMember = "IDDoctor";      // El valor real (ID)

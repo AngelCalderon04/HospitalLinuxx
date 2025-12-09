@@ -26,9 +26,10 @@ namespace CapaPresentacion
                 string.IsNullOrWhiteSpace(textExequatur.Text) ||
                 string.IsNullOrWhiteSpace(textTarifa.Text) ||
                 string.IsNullOrWhiteSpace(textusuario.Text) ||
-                string.IsNullOrWhiteSpace(textClave.Text))
+                string.IsNullOrWhiteSpace(textClave.Text) ||
+                string.IsNullOrWhiteSpace(cboEspecialidad.Text)) // <--- Ahora sí está dentro
             {
-                MessageBox.Show("Por favor, complete todos los campos (incluida la Cédula).", "Faltan Datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Por favor, complete todos los campos (incluida la Especialidad).", "Faltan Datos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 

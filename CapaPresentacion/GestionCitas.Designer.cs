@@ -318,7 +318,7 @@
             Controls.Add(lblPaciente);
             Margin = new Padding(2);
             Name = "GestionCitas";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.WindowsDefaultBounds;
             Text = "GestionCitas";
             Load += FormGestionCitas_Load;
             Click += FormGestionCitas_Load;

@@ -33,7 +33,6 @@
             label2 = new Label();
             lblEspecialidad = new Label();
             lblExequatur = new Label();
-            txtespecialidad = new TextBox();
             textExequatur = new TextBox();
             label3 = new Label();
             textTarifa = new TextBox();
@@ -279,7 +278,6 @@
             Controls.Add(textTarifa);
             Controls.Add(label3);
             Controls.Add(textExequatur);
-            Controls.Add(txtespecialidad);
             Controls.Add(lblExequatur);
             Controls.Add(lblEspecialidad);
             Controls.Add(label2);
@@ -301,7 +299,6 @@
         private Label label2;
         private Label lblEspecialidad;
         private Label lblExequatur;
-        private TextBox txtespecialidad;
         private TextBox textExequatur;
         private Label label3;
         private TextBox textTarifa;
