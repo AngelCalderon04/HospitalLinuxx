@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblGestionCitas = new Label();
             lblPaciente = new Label();
             lblDoctor = new Label();
@@ -48,10 +49,12 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            comboBox1 = new ComboBox();
+            txtcosto = new ComboBox();
             progressBar1 = new ProgressBar();
+            errorProvider1 = new ErrorProvider(components);
             ((System.ComponentModel.ISupportInitialize)dgvCitas).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
             SuspendLayout();
             // 
             // lblGestionCitas
@@ -103,7 +106,7 @@
             // 
             dtpFecha.Format = DateTimePickerFormat.Short;
             dtpFecha.Location = new Point(42, 281);
-            dtpFecha.Margin = new Padding(2, 2, 2, 2);
+            dtpFecha.Margin = new Padding(2);
             dtpFecha.Name = "dtpFecha";
             dtpFecha.Size = new Size(112, 27);
             dtpFecha.TabIndex = 6;
@@ -123,7 +126,7 @@
             // 
             dtpHora.Format = DateTimePickerFormat.Time;
             dtpHora.Location = new Point(199, 281);
-            dtpHora.Margin = new Padding(2, 2, 2, 2);
+            dtpHora.Margin = new Padding(2);
             dtpHora.Name = "dtpHora";
             dtpHora.ShowUpDown = true;
             dtpHora.Size = new Size(122, 27);
@@ -133,7 +136,7 @@
             // 
             btnAgendar.BackColor = Color.PaleGreen;
             btnAgendar.Location = new Point(64, 380);
-            btnAgendar.Margin = new Padding(2, 2, 2, 2);
+            btnAgendar.Margin = new Padding(2);
             btnAgendar.Name = "btnAgendar";
             btnAgendar.Size = new Size(104, 27);
             btnAgendar.TabIndex = 11;
@@ -145,7 +148,7 @@
             // 
             btnLimpiar.BackColor = Color.MistyRose;
             btnLimpiar.Location = new Point(185, 380);
-            btnLimpiar.Margin = new Padding(2, 2, 2, 2);
+            btnLimpiar.Margin = new Padding(2);
             btnLimpiar.Name = "btnLimpiar";
             btnLimpiar.Size = new Size(90, 27);
             btnLimpiar.TabIndex = 12;
@@ -157,7 +160,7 @@
             // 
             btnCancelar.BackColor = Color.LightCoral;
             btnCancelar.Location = new Point(185, 433);
-            btnCancelar.Margin = new Padding(2, 2, 2, 2);
+            btnCancelar.Margin = new Padding(2);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(90, 27);
             btnCancelar.TabIndex = 13;
@@ -181,7 +184,7 @@
             dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvCitas.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCitas.Location = new Point(431, 110);
-            dgvCitas.Margin = new Padding(2, 2, 2, 2);
+            dgvCitas.Margin = new Padding(2);
             dgvCitas.Name = "dgvCitas";
             dgvCitas.ReadOnly = true;
             dgvCitas.RowHeadersWidth = 62;
@@ -195,7 +198,7 @@
             cboPaciente.AutoCompleteSource = AutoCompleteSource.CustomSource;
             cboPaciente.FormattingEnabled = true;
             cboPaciente.Location = new Point(100, 119);
-            cboPaciente.Margin = new Padding(2, 2, 2, 2);
+            cboPaciente.Margin = new Padding(2);
             cboPaciente.Name = "cboPaciente";
             cboPaciente.Size = new Size(222, 28);
             cboPaciente.TabIndex = 16;
@@ -207,7 +210,7 @@
             cboDoctor.AutoCompleteSource = AutoCompleteSource.CustomSource;
             cboDoctor.FormattingEnabled = true;
             cboDoctor.Location = new Point(100, 165);
-            cboDoctor.Margin = new Padding(2, 2, 2, 2);
+            cboDoctor.Margin = new Padding(2);
             cboDoctor.Name = "cboDoctor";
             cboDoctor.Size = new Size(222, 28);
             cboDoctor.TabIndex = 17;
@@ -217,7 +220,7 @@
             // 
             button1.BackColor = SystemColors.ActiveCaption;
             button1.Location = new Point(64, 433);
-            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Margin = new Padding(2);
             button1.Name = "button1";
             button1.Size = new Size(104, 27);
             button1.TabIndex = 18;
@@ -230,7 +233,7 @@
             panel1.BackColor = Color.RoyalBlue;
             panel1.Controls.Add(lblGestionCitas);
             panel1.Location = new Point(4, 0);
-            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Margin = new Padding(2);
             panel1.Name = "panel1";
             panel1.Size = new Size(1284, 50);
             panel1.TabIndex = 19;
@@ -266,15 +269,15 @@
             label3.TabIndex = 22;
             label3.Text = "Costo: ";
             // 
-            // comboBox1
+            // txtcosto
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "$3,500.00" });
-            comboBox1.Location = new Point(99, 212);
-            comboBox1.Margin = new Padding(2, 2, 2, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(222, 28);
-            comboBox1.TabIndex = 23;
+            txtcosto.FormattingEnabled = true;
+            txtcosto.Items.AddRange(new object[] { "$3,500.00" });
+            txtcosto.Location = new Point(99, 212);
+            txtcosto.Margin = new Padding(2);
+            txtcosto.Name = "txtcosto";
+            txtcosto.Size = new Size(222, 28);
+            txtcosto.TabIndex = 23;
             // 
             // progressBar1
             // 
@@ -283,7 +286,10 @@
             progressBar1.Size = new Size(280, 20);
             progressBar1.TabIndex = 24;
             progressBar1.Visible = false;
-            progressBar1.Click += progressBar1_Click;
+            // 
+            // errorProvider1
+            // 
+            errorProvider1.ContainerControl = this;
             // 
             // GestionCitas
             // 
@@ -291,7 +297,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1112, 504);
             Controls.Add(progressBar1);
-            Controls.Add(comboBox1);
+            Controls.Add(txtcosto);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -310,7 +316,7 @@
             Controls.Add(lblFecha);
             Controls.Add(lblDoctor);
             Controls.Add(lblPaciente);
-            Margin = new Padding(2, 2, 2, 2);
+            Margin = new Padding(2);
             Name = "GestionCitas";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "GestionCitas";
@@ -319,6 +325,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvCitas).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -345,7 +352,8 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private ComboBox comboBox1;
+        private ComboBox txtcosto;
         private ProgressBar progressBar1;
+        private ErrorProvider errorProvider1;
     }
 }
