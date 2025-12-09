@@ -37,7 +37,7 @@
             label3 = new Label();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
-            progressBar1 = new ProgressBar();
+            dateTimePicker1 = new DateTimePicker();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -157,22 +157,20 @@
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
-            // progressBar1
+            // dateTimePicker1
             // 
-            progressBar1.Location = new Point(198, 266);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(307, 21);
-            progressBar1.TabIndex = 10;
-            progressBar1.Visible = false;
-            progressBar1.Click += progressBar1_Click;
+            dateTimePicker1.Location = new Point(298, 331);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(300, 31);
+            dateTimePicker1.TabIndex = 10;
             // 
             // FrmLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(538, 299);
-            Controls.Add(progressBar1);
+            ClientSize = new Size(672, 374);
+            Controls.Add(dateTimePicker1);
             Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -203,6 +201,6 @@
         private Label label3;
         private Panel panel1;
         private PictureBox pictureBox1;
-        private ProgressBar progressBar1;
+        private DateTimePicker dateTimePicker1;
     }
 }

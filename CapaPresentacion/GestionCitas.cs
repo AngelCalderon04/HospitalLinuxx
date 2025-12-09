@@ -55,20 +55,18 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-                conn.Open();
-                // OJO AQUÍ: Estamos pidiendo 3 cosas: ID, Nombre y TARIFA
-                string query = @"SELECT 
-                            d.IDDoctor, 
-                            p.Nombre, 
-                            d.TarifaConsulta 
-                        FROM Doctor d
-                        INNER JOIN Personas p ON d.IDPersona = p.IDPersona";
+                // TODO: SQL con IDDoctor
+                string sql = @"SELECT D.IDDoctor, Per.Nombre 
+                       FROM Doctor D 
+                       INNER JOIN Personas Per ON D.IDPersona = Per.IDPersona";
 
-                SqlDataAdapter da = new SqlDataAdapter(query, conn);
+                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                // Guardamos TODA la tabla en el combo (aunque solo mostremos el nombre)
+                // TODO: ORDEN CORRECTO
+                cboDoctor.DisplayMember = "Nombre";
+                cboDoctor.ValueMember = "IDDoctor";
                 cboDoctor.DataSource = dt;
                 cboDoctor.DisplayMember = "Nombre";      // Lo que ve el usuario
                 cboDoctor.ValueMember = "IDDoctor";      // El valor real (ID)
@@ -78,7 +76,7 @@ namespace CapaPresentacion
         private void FormGestionCitas_Load(object sender, EventArgs e)
         {
             //TODO: se cargan los datos 
-
+          
             CargarComboPacientes();
             CargarComboDoctores();
             CargarGridCitasData();
@@ -173,7 +171,7 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-
+              
                 //TODO:el sql correcto con los IDs ocultos 
                 string sql = @"SELECT 
                     c.IDCita,
@@ -197,7 +195,7 @@ namespace CapaPresentacion
 
                 //TODO:Solucion 
 
-
+             
                 //TODO: estolimpia os datosviejos de a tabla 
                 dgvCitas.DataSource = null;
                 dgvCitas.Columns.Clear();
@@ -208,7 +206,7 @@ namespace CapaPresentacion
                 //TODO: Le damos los datos editados 
                 dgvCitas.DataSource = dt;
 
-
+        
                 dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvCitas.ReadOnly = true;
@@ -350,12 +348,12 @@ namespace CapaPresentacion
 
                 dgvCitas.DataSource = dt;
 
-                //TODO: esteticoss raros de indio 
+                 //TODO: esteticoss raros de indio 
                 dgvCitas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
                 dgvCitas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
                 dgvCitas.ReadOnly = true;
 
-
+                
                 if (dgvCitas.Columns.Contains("IDPaciente")) dgvCitas.Columns["IDPaciente"].Visible = false;
                 if (dgvCitas.Columns.Contains("IDDoctor")) dgvCitas.Columns["IDDoctor"].Visible = false;
 
@@ -371,11 +369,11 @@ namespace CapaPresentacion
 
         private void button1_Click(object sender, EventArgs e)
         {
-
+            
             //TODO Verificacion si hay fila seleccionadad 
             if (dgvCitas.SelectedRows.Count > 0)
             {
-                // TODO Cambiar el modo a "EDITAR"
+               // TODO Cambiar el modo a "EDITAR"
                 Editar = true;
 
 
@@ -384,7 +382,7 @@ namespace CapaPresentacion
                     // TODO se obtiene el ID (Usando SelectedRows[0]
                     IDCitaSeleccionada = Convert.ToInt32(dgvCitas.SelectedRows[0].Cells["IDCita"].Value);
 
-
+                    
                     cboPaciente.SelectedValue = Convert.ToInt32(dgvCitas.SelectedRows[0].Cells["IDPaciente"].Value);
                     cboDoctor.SelectedValue = Convert.ToInt32(dgvCitas.SelectedRows[0].Cells["IDDoctor"].Value);
 

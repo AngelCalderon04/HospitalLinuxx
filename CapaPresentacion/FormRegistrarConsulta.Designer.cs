@@ -45,7 +45,8 @@
             panel1 = new Panel();
             label2 = new Label();
             panel2 = new Panel();
-            progressBar1 = new ProgressBar();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -235,21 +236,29 @@
             panel2.Size = new Size(116, 566);
             panel2.TabIndex = 16;
             // 
-            // progressBar1
+            // dateTimePicker1
             // 
-            progressBar1.Location = new Point(330, 602);
-            progressBar1.Name = "progressBar1";
-            progressBar1.Size = new Size(447, 18);
-            progressBar1.TabIndex = 17;
-            progressBar1.Visible = false;
-            progressBar1.Click += progressBar1_Click;
+            dateTimePicker1.Format = DateTimePickerFormat.Short;
+            dateTimePicker1.Location = new Point(562, 735);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(147, 31);
+            dateTimePicker1.TabIndex = 17;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Format = DateTimePickerFormat.Time;
+            dateTimePicker2.Location = new Point(680, 735);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(158, 31);
+            dateTimePicker2.TabIndex = 18;
             // 
             // FormRegistrarConsulta
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(987, 634);
-            Controls.Add(progressBar1);
+            ClientSize = new Size(1234, 792);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(dateTimePicker1);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(button1);
@@ -295,6 +304,7 @@
         private Panel panel1;
         private Label label2;
         private Panel panel2;
-        private ProgressBar progressBar1;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
     }
 }
