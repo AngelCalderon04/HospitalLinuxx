@@ -37,6 +37,7 @@
             label3 = new Label();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
+            dateTimePicker1 = new DateTimePicker();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -147,12 +148,20 @@
             pictureBox1.TabIndex = 9;
             pictureBox1.TabStop = false;
             // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.Location = new Point(298, 331);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(300, 31);
+            dateTimePicker1.TabIndex = 10;
+            // 
             // FrmLogin
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(672, 374);
+            Controls.Add(dateTimePicker1);
             Controls.Add(panel1);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -182,5 +191,6 @@
         private Label label3;
         private Panel panel1;
         private PictureBox pictureBox1;
+        private DateTimePicker dateTimePicker1;
     }
 }
