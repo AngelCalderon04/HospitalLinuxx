@@ -55,21 +55,23 @@ namespace CapaPresentacion
         {
             using (SqlConnection conn = new ConexionDatos().ObtenerConexion())
             {
-                // TODO: SQL con IDDoctor
-                string sql = @"SELECT D.IDDoctor, Per.Nombre 
-                       FROM Doctor D 
-                       INNER JOIN Personas Per ON D.IDPersona = Per.IDPersona";
+                conn.Open();
+                // OJO AQUÍ: Estamos pidiendo 3 cosas: ID, Nombre y TARIFA
+                string query = @"SELECT 
+                            d.IDDoctor, 
+                            p.Nombre, 
+                            d.TarifaConsulta 
+                        FROM Doctor d
+                        INNER JOIN Personas p ON d.IDPersona = p.IDPersona";
 
-                SqlDataAdapter da = new SqlDataAdapter(sql, conn);
+                SqlDataAdapter da = new SqlDataAdapter(query, conn);
                 DataTable dt = new DataTable();
                 da.Fill(dt);
 
-                // TODO: ORDEN CORRECTO
-                cboDoctor.DisplayMember = "Nombre";
-                cboDoctor.ValueMember = "IDDoctor";
+                // Guardamos TODA la tabla en el combo (aunque solo mostremos el nombre)
                 cboDoctor.DataSource = dt;
-
-                cboDoctor.SelectedIndex = -1;
+                cboDoctor.DisplayMember = "Nombre";      // Lo que ve el usuario
+                cboDoctor.ValueMember = "IDDoctor";      // El valor real (ID)
             }
         }
 
@@ -262,7 +264,26 @@ namespace CapaPresentacion
 
         private void cboDoctor_SelectedIndexChanged(object sender, EventArgs e)
         {
+            // Verificamos que sea un doctor válido y no la selección vacía (-1)
+            if (cboDoctor.SelectedIndex != -1 && cboDoctor.SelectedItem is DataRowView)
+            {
+                try
+                {
+                    //  Convertimos el ítem seleccionado a una Fila de Datos
+                    DataRowView fila = (DataRowView)cboDoctor.SelectedItem;
 
+                    // Buscamos la columna "TarifaConsulta" (que trajimos en el SQL oculto)
+                    decimal tarifa = Convert.ToDecimal(fila["TarifaConsulta"]);
+
+                    // La ponemos en el TextBox txtCosto con formato de dinero
+                    txtcosto.Text = tarifa.ToString("C2"); // Muestra: $ 2,500.00
+                }
+                catch
+                {
+                    // Si algo falla, ponemos 0
+                    txtcosto.Text = "$ 0.00";
+                }
+            }
         }
 
         private bool ObtenerIDPacientePorNombre(string nombre, out int idPaciente)

@@ -33,7 +33,6 @@
             label2 = new Label();
             lblEspecialidad = new Label();
             lblExequatur = new Label();
-            txtespecialidad = new TextBox();
             textExequatur = new TextBox();
             label3 = new Label();
             textTarifa = new TextBox();
@@ -47,6 +46,7 @@
             textCedula = new TextBox();
             panel1 = new Panel();
             pictureBox1 = new PictureBox();
+            cboEspecialidad = new ComboBox();
             panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -101,14 +101,6 @@
             lblExequatur.Size = new Size(114, 23);
             lblExequatur.TabIndex = 4;
             lblExequatur.Text = "Exequatur:";
-            // 
-            // txtespecialidad
-            // 
-            txtespecialidad.Location = new Point(189, 162);
-            txtespecialidad.Name = "txtespecialidad";
-            txtespecialidad.PlaceholderText = "Especialidad ";
-            txtespecialidad.Size = new Size(257, 31);
-            txtespecialidad.TabIndex = 5;
             // 
             // textExequatur
             // 
@@ -230,12 +222,23 @@
             pictureBox1.TabIndex = 18;
             pictureBox1.TabStop = false;
             // 
+            // cboEspecialidad
+            // 
+            cboEspecialidad.DropDownStyle = ComboBoxStyle.DropDownList;
+            cboEspecialidad.FormattingEnabled = true;
+            cboEspecialidad.Items.AddRange(new object[] { "Medicina Interna", "Pediatría", "Ginecología y Obstetricia", "Cardiología", "Neumología", "Gastroenterología", "Dermatología", "Neurología", "Endocrinología", "Psiquiatría", "Oftalmología", "Otorrinolaringología", "Urología", "Nefrología", "Oncología", "Hematología", "Infectología" });
+            cboEspecialidad.Location = new Point(189, 173);
+            cboEspecialidad.Name = "cboEspecialidad";
+            cboEspecialidad.Size = new Size(257, 33);
+            cboEspecialidad.TabIndex = 19;
+            // 
             // FormRegistrarDoctor
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(951, 572);
+            Controls.Add(cboEspecialidad);
             Controls.Add(pictureBox1);
             Controls.Add(panel1);
             Controls.Add(textCedula);
@@ -249,7 +252,6 @@
             Controls.Add(textTarifa);
             Controls.Add(label3);
             Controls.Add(textExequatur);
-            Controls.Add(txtespecialidad);
             Controls.Add(lblExequatur);
             Controls.Add(lblEspecialidad);
             Controls.Add(label2);
@@ -270,7 +272,6 @@
         private Label label2;
         private Label lblEspecialidad;
         private Label lblExequatur;
-        private TextBox txtespecialidad;
         private TextBox textExequatur;
         private Label label3;
         private TextBox textTarifa;
@@ -284,5 +285,6 @@
         private TextBox textCedula;
         private Panel panel1;
         private PictureBox pictureBox1;
+        private ComboBox cboEspecialidad;
     }
 }

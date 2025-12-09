@@ -48,7 +48,7 @@
             label1 = new Label();
             label2 = new Label();
             label3 = new Label();
-            comboBox1 = new ComboBox();
+            txtcosto = new TextBox();
             ((System.ComponentModel.ISupportInitialize)dgvCitas).BeginInit();
             panel1.SuspendLayout();
             SuspendLayout();
@@ -246,21 +246,20 @@
             label3.TabIndex = 22;
             label3.Text = "Costo: ";
             // 
-            // comboBox1
+            // txtcosto
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "$3,500.00" });
-            comboBox1.Location = new Point(124, 265);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(277, 33);
-            comboBox1.TabIndex = 23;
+            txtcosto.Location = new Point(135, 266);
+            txtcosto.Name = "txtcosto";
+            txtcosto.ReadOnly = true;
+            txtcosto.Size = new Size(269, 31);
+            txtcosto.TabIndex = 23;
             // 
             // GestionCitas
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1390, 630);
-            Controls.Add(comboBox1);
+            Controls.Add(txtcosto);
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
@@ -280,7 +279,7 @@
             Controls.Add(lblDoctor);
             Controls.Add(lblPaciente);
             Name = "GestionCitas";
-            StartPosition = FormStartPosition.CenterScreen;
+            StartPosition = FormStartPosition.WindowsDefaultBounds;
             Text = "GestionCitas";
             Load += FormGestionCitas_Load;
             Click += FormGestionCitas_Load;
@@ -313,6 +312,6 @@
         private Label label1;
         private Label label2;
         private Label label3;
-        private ComboBox comboBox1;
+        private TextBox txtcosto;
     }
 }
