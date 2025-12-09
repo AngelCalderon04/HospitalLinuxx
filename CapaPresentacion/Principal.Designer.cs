@@ -34,25 +34,36 @@
             btnHistorial = new Button();
             btnSalir = new Button();
             btnRegistrarCONS = new Button();
+            panel1 = new Panel();
+            button1 = new Button();
+            label2 = new Label();
+            dateTimePicker1 = new DateTimePicker();
+            dateTimePicker2 = new DateTimePicker();
+            pictureBox1 = new PictureBox();
+            progressBar1 = new ProgressBar();
+            panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 13.8F);
-            label1.Location = new Point(280, 48);
+            label1.Font = new Font("Century", 18F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            label1.ForeColor = Color.White;
+            label1.Location = new Point(162, 28);
             label1.Margin = new Padding(2, 0, 2, 0);
             label1.Name = "label1";
-            label1.Size = new Size(234, 38);
+            label1.Size = new Size(424, 35);
             label1.TabIndex = 0;
-            label1.Text = "MENU PRINCIPAL";
+            label1.Text = "MENU PRINCIPAL LINUX";
             // 
             // btnRegistrarPaciente
             // 
-            btnRegistrarPaciente.Location = new Point(295, 136);
+            btnRegistrarPaciente.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnRegistrarPaciente.Location = new Point(25, 111);
             btnRegistrarPaciente.Margin = new Padding(2);
             btnRegistrarPaciente.Name = "btnRegistrarPaciente";
-            btnRegistrarPaciente.Size = new Size(209, 34);
+            btnRegistrarPaciente.Size = new Size(198, 27);
             btnRegistrarPaciente.TabIndex = 1;
             btnRegistrarPaciente.Text = "REGISTRAR PACIENTE ";
             btnRegistrarPaciente.UseVisualStyleBackColor = true;
@@ -60,10 +71,11 @@
             // 
             // btnAgendarCita
             // 
-            btnAgendarCita.Location = new Point(295, 210);
+            btnAgendarCita.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnAgendarCita.Location = new Point(25, 150);
             btnAgendarCita.Margin = new Padding(2);
             btnAgendarCita.Name = "btnAgendarCita";
-            btnAgendarCita.Size = new Size(212, 34);
+            btnAgendarCita.Size = new Size(198, 27);
             btnAgendarCita.TabIndex = 2;
             btnAgendarCita.Text = "AGENDAR CITA";
             btnAgendarCita.UseVisualStyleBackColor = true;
@@ -71,10 +83,11 @@
             // 
             // btnHistorial
             // 
-            btnHistorial.Location = new Point(295, 366);
+            btnHistorial.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnHistorial.Location = new Point(25, 245);
             btnHistorial.Margin = new Padding(2);
             btnHistorial.Name = "btnHistorial";
-            btnHistorial.Size = new Size(212, 34);
+            btnHistorial.Size = new Size(198, 27);
             btnHistorial.TabIndex = 3;
             btnHistorial.Text = "HISTORIAL PACIENTE ";
             btnHistorial.UseVisualStyleBackColor = true;
@@ -83,10 +96,10 @@
             // btnSalir
             // 
             btnSalir.Font = new Font("Segoe UI", 9.8F);
-            btnSalir.Location = new Point(355, 449);
+            btnSalir.Location = new Point(65, 366);
             btnSalir.Margin = new Padding(2);
             btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(112, 34);
+            btnSalir.Size = new Size(90, 27);
             btnSalir.TabIndex = 4;
             btnSalir.Text = "SALIR";
             btnSalir.UseVisualStyleBackColor = true;
@@ -94,32 +107,111 @@
             // 
             // btnRegistrarCONS
             // 
-            btnRegistrarCONS.Location = new Point(295, 292);
+            btnRegistrarCONS.Font = new Font("Century", 9F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            btnRegistrarCONS.Location = new Point(25, 194);
             btnRegistrarCONS.Margin = new Padding(2);
             btnRegistrarCONS.Name = "btnRegistrarCONS";
-            btnRegistrarCONS.Size = new Size(208, 34);
+            btnRegistrarCONS.Size = new Size(198, 27);
             btnRegistrarCONS.TabIndex = 5;
             btnRegistrarCONS.Text = "REGISTRAR CONSULTA";
             btnRegistrarCONS.UseVisualStyleBackColor = true;
             btnRegistrarCONS.Click += btnRegistrarCONS_Click;
             // 
+            // panel1
+            // 
+            panel1.BackColor = Color.RoyalBlue;
+            panel1.Controls.Add(label1);
+            panel1.Location = new Point(0, 5);
+            panel1.Margin = new Padding(2, 2, 2, 2);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(751, 79);
+            panel1.TabIndex = 6;
+            // 
+            // button1
+            // 
+            button1.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button1.Location = new Point(25, 290);
+            button1.Margin = new Padding(2, 2, 2, 2);
+            button1.Name = "button1";
+            button1.Size = new Size(198, 27);
+            button1.TabIndex = 7;
+            button1.Text = "AGREGAR PERSONAL";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click_2;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            label2.Location = new Point(370, 98);
+            label2.Margin = new Padding(2, 0, 2, 0);
+            label2.Name = "label2";
+            label2.Size = new Size(239, 21);
+            label2.TabIndex = 8;
+            label2.Text = "BIENVENIDO AL SISTEMA";
+            // 
+            // dateTimePicker1
+            // 
+            dateTimePicker1.CalendarFont = new Font("Century", 10F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            dateTimePicker1.Location = new Point(310, 406);
+            dateTimePicker1.Margin = new Padding(2, 2, 2, 2);
+            dateTimePicker1.Name = "dateTimePicker1";
+            dateTimePicker1.Size = new Size(238, 27);
+            dateTimePicker1.TabIndex = 9;
+            // 
+            // dateTimePicker2
+            // 
+            dateTimePicker2.Format = DateTimePickerFormat.Time;
+            dateTimePicker2.Location = new Point(553, 406);
+            dateTimePicker2.Margin = new Padding(2, 2, 2, 2);
+            dateTimePicker2.Name = "dateTimePicker2";
+            dateTimePicker2.Size = new Size(122, 27);
+            dateTimePicker2.TabIndex = 10;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources._new;
+            pictureBox1.Location = new Point(370, 119);
+            pictureBox1.Margin = new Padding(2, 2, 2, 2);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(303, 249);
+            pictureBox1.TabIndex = 11;
+            pictureBox1.TabStop = false;
+            // 
+            // progressBar1
+            // 
+            progressBar1.Location = new Point(25, 416);
+            progressBar1.Name = "progressBar1";
+            progressBar1.Size = new Size(198, 19);
+            progressBar1.TabIndex = 12;
+            progressBar1.Visible = false;
+            progressBar1.Click += progressBar1_Click;
+            // 
             // Principal
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources.diapositiva_1_658x502;
-            ClientSize = new Size(938, 498);
+            BackColor = Color.White;
+            ClientSize = new Size(750, 440);
+            Controls.Add(progressBar1);
+            Controls.Add(dateTimePicker2);
+            Controls.Add(dateTimePicker1);
+            Controls.Add(label2);
+            Controls.Add(button1);
+            Controls.Add(panel1);
             Controls.Add(btnRegistrarCONS);
             Controls.Add(btnSalir);
             Controls.Add(btnHistorial);
             Controls.Add(btnAgendarCita);
             Controls.Add(btnRegistrarPaciente);
-            Controls.Add(label1);
+            Controls.Add(pictureBox1);
             Margin = new Padding(2);
             Name = "Principal";
             Text = "Principal";
-            WindowState = FormWindowState.Maximized;
             Load += Principal_Load;
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -132,5 +224,12 @@
         private Button btnHistorial;
         private Button btnSalir;
         private Button btnRegistrarCONS;
+        private Panel panel1;
+        private Button button1;
+        private Label label2;
+        private DateTimePicker dateTimePicker1;
+        private DateTimePicker dateTimePicker2;
+        private PictureBox pictureBox1;
+        private ProgressBar progressBar1;
     }
 }

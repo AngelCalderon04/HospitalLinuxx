@@ -8,10 +8,11 @@ namespace CapaDatos
     {
         private ConexionDatos conexion = new ConexionDatos();
 
-        //  REGISTRAR 
+        // MODIFICADO: Agregué 'usuario' y 'clave' al final
         public void RegistrarAdministrativo(
             string nombre, string cedula, string telefono, string email,
-            string departamento, string cargo, decimal salario)
+            string departamento, string cargo, decimal salario,
+            string usuario, string clave)
         {
             using (SqlConnection conn = conexion.ObtenerConexion())
             {
@@ -22,7 +23,7 @@ namespace CapaDatos
                 {
                     int idPersonaGenerado = 0;
 
-                    //INSERTAR EN PERSONAS
+                    // PASO 1: INSERTAR EN PERSONAS
                     string queryPersona = "INSERT INTO Personas (Nombre, Cedula, Telefono, Email, Rol) " +
                                           "VALUES (@Nombre, @Cedula, @Telefono, @Email, 'Administrativo'); " +
                                           "SELECT CAST(SCOPE_IDENTITY() AS INT);";
@@ -35,8 +36,7 @@ namespace CapaDatos
 
                     idPersonaGenerado = (int)cmdPersona.ExecuteScalar();
 
-                    //INSERTAR EN PERSONAL ADMINISTRATIVO
-                    
+                    // PASO 2: INSERTAR EN PERSONAL ADMINISTRATIVO
                     string queryAdmin = "INSERT INTO PersonalAdministrativo (IDPersona, Departamento, Cargo, Salario) " +
                                         "VALUES (@IDPersona, @Departamento, @Cargo, @Salario)";
 
@@ -45,15 +45,25 @@ namespace CapaDatos
                     cmdAdmin.Parameters.AddWithValue("@Departamento", departamento);
                     cmdAdmin.Parameters.AddWithValue("@Cargo", cargo);
                     cmdAdmin.Parameters.AddWithValue("@Salario", salario);
-
                     cmdAdmin.ExecuteNonQuery();
+
+                    // PASO 3: INSERTAR EN USUARIOS (¡ESTO FALTABA!)
+                    string queryUsuario = "INSERT INTO Usuarios (NombreUsuario, Clave, NivelAcceso) " +
+                                          "VALUES (@User, @Pass, 'Administrativo')";
+
+                    SqlCommand cmdUsuario = new SqlCommand(queryUsuario, conn, transaction);
+                    cmdUsuario.Parameters.AddWithValue("@User", usuario);
+                    cmdUsuario.Parameters.AddWithValue("@Pass", clave);
+                    cmdUsuario.ExecuteNonQuery();
+
+                    // GUARDAR TODO
                     transaction.Commit();
                 }
                 catch (SqlException sqlEx)
                 {
                     transaction.Rollback();
                     if (sqlEx.Number == 2627 || sqlEx.Number == 2601)
-                        throw new Exception("Error: Ya existe un empleado con esa Cédula.");
+                        throw new Exception("Error: Ya existe esa Cédula o ese Usuario.");
                     else
                         throw new Exception("Error SQL: " + sqlEx.Message);
                 }
@@ -65,68 +75,6 @@ namespace CapaDatos
             }
         }
 
-        // ACTUALIZAR 
-        public void ActualizarAdministrativo(int idAdministrativo, string departamento, string cargo, decimal salario)
-        {
-            using (SqlConnection conn = conexion.ObtenerConexion())
-            {
-                conn.Open();
-                try
-                {
-                    string sql = "UPDATE PersonalAdministrativo SET " +
-                                 "Departamento = @Departamento, " +
-                                 "Cargo = @Cargo, " +
-                                 "Salario = @Salario " +
-                                 "WHERE IDAdministrativo = @IDAdministrativo";
-
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    cmd.Parameters.AddWithValue("@IDAdministrativo", idAdministrativo);
-                    cmd.Parameters.AddWithValue("@Departamento", departamento);
-                    cmd.Parameters.AddWithValue("@Cargo", cargo);
-                    cmd.Parameters.AddWithValue("@Salario", salario);
-
-                    cmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al actualizar: " + ex.Message);
-                }
-            }
-        }
-
-        //  OBTENER LISTA Para el DataGridView
-        public DataTable ObtenerTodoPersonalAdmin()
-        {
-            DataTable dt = new DataTable();
-            using (SqlConnection conn = conexion.ObtenerConexion())
-            {
-                conn.Open();
-                try
-                {
-                    string sql = @"SELECT 
-                                     PA.IDAdministrativo,
-                                     Per.Nombre, 
-                                     Per.Cedula,
-                                     Per.Telefono,
-                                     Per.Email,
-                                     PA.Cargo,
-                                     PA.Departamento,
-                                     PA.Salario
-                                   FROM PersonalAdministrativo PA
-                                   INNER JOIN Personas Per ON PA.IDPersona = Per.IDpersona
-                                   WHERE Per.Rol = 'Administrativo'
-                                   ORDER BY Per.Nombre";
-
-                    SqlCommand cmd = new SqlCommand(sql, conn);
-                    SqlDataAdapter da = new SqlDataAdapter(cmd);
-                    da.Fill(dt);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception("Error al listar personal: " + ex.Message);
-                }
-            }
-            return dt;
-        }
+      
     }
 }

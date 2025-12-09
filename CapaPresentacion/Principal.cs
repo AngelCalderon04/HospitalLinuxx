@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
 namespace CapaPresentacion
@@ -16,28 +17,34 @@ namespace CapaPresentacion
         public Principal()
         {
             InitializeComponent();
+
+            progressBar1.Visible = false;
         }
 
         // --- ESTA ES LA PARTE CLAVE DEL LOGIN ---
-        private void Principal_Load(object sender, EventArgs e)
+        private async void Principal_Load(object sender, EventArgs e)
         {
-            // 1. Ocultamos el menú principal apenas arranca para que no se vea
             this.Hide();
 
-            // 2. Abrimos el formulario de Login como una ventana "Modal" (bloqueante)
-            // Asegúrate de haber creado ya el FrmLogin como te indiqué en el paso anterior
             FrmLogin login = new FrmLogin();
             DialogResult respuesta = login.ShowDialog();
 
-            // 3. Verificamos qué pasó en el Login
             if (respuesta == DialogResult.OK)
             {
-                // Si el usuario puso la clave bien (DialogResult.OK), mostramos el menú
+                progressBar1.Visible = true;
+                progressBar1.Value = 0;
+
+                for (int i = 0; i <= 100; i++)
+                {
+                    progressBar1.Value = i;
+                    await Task.Delay(10);
+                }
+
+                progressBar1.Visible = false;
                 this.Show();
             }
             else
             {
-                // Si el usuario cerró el login o le dio a Cancelar, matamos la aplicación completa
                 Application.Exit();
             }
         }
@@ -83,7 +90,22 @@ namespace CapaPresentacion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            // Botón vacío
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_2(object sender, EventArgs e)
+        {
+            FormAGREGAR form = new FormAGREGAR();
+            form.ShowDialog();
+        }
+
+        private void progressBar1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
